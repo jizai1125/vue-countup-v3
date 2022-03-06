@@ -1,0 +1,48 @@
+{
+  "name": "vue-countup-v3",
+  "keywords": [
+    "vue3",
+    "countup",
+    "vue3-countup",
+    "library"
+  ],
+  "version": "0.0.0",
+  "description": "Vue 3 component wrap for countUp.js",
+  "auther": "jizai <1414589221@qq.com>",
+  "main": "dist/vue-countup-v3.umd.js",
+  "module": "dist/vue-countup-v3.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-countup-v3.es.js",
+      "require": "./dist/vue-countup-v3.umd.js"
+    }
+  },
+  "types": "vue-countup-v3.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jizai1125/vue-countup-v3"
+  },
+  "homepage": "https://github.com/jizai1125/vue-countup-v3",
+  "files": [
+    "dist/*",
+    "vue-countup-v3.d.ts",
+    "src/**/*.vue"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite serve ./demo -c ./vite.config.ts",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "countup.js": "^2.1.0",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.21",
+    "@vitejs/plugin-vue": "^2.2.0",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0",
+    "vue-tsc": "^0.29.8"
+  }
+}
