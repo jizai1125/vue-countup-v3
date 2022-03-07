@@ -7,7 +7,7 @@
     "vue3-countup",
     "library"
   ],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vue 3 component wrap for countUp.js",
   "auther": "jizai <1414589221@qq.com>",
   "main": "dist/vue-countup-v3.umd.js",
