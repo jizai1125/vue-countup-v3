@@ -27,7 +27,8 @@ const props = withDefaults(
     startVal: 0,
     duration: 2.5,
     autoplay: true,
-    loop: false
+    loop: false,
+    options: undefined
   }
 )
 const emits = defineEmits<{

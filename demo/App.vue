@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CountUpV3 from '../dist/vue-countup-v3.es.js'
-import type { CountUp } from 'countup.js';
+import type { CountUp } from 'countup.js'
 const options = {
   decimalPlaces: 2
 }
@@ -13,10 +13,10 @@ const onFinished = () => {
 </script>
 
 <template>
-<div>vue countup</div>
+  <div>vue countup</div>
   <count-up-v3
     class="coutup"
-    :endVal="2000"
+    :end-val="2000"
     :duration="3"
     :loop="2"
     :options="options"
