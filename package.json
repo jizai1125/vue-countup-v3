@@ -1,5 +1,7 @@
 {
   "name": "vue-countup-v3",
+  "version": "0.0.3",
+  "description": "Vue 3 component wrap for countUp.js",
   "keywords": [
     "vue3",
     "countup",
@@ -7,8 +9,6 @@
     "vue3-countup",
     "library"
   ],
-  "version": "0.0.2",
-  "description": "Vue 3 component wrap for countUp.js",
   "auther": "jizai <1414589221@qq.com>",
   "main": "dist/vue-countup-v3.umd.js",
   "module": "dist/vue-countup-v3.es.js",
