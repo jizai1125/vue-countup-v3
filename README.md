@@ -30,12 +30,12 @@ import CountUp from 'vue-countup-v3'
 
 ```vue
 <script setup lang="ts">
-import CountUpV3 from '../dist/vue-countup-v3.es.js'
+import CountUpV3 from 'vue-countup-v3'
 import type { CountUp } from 'countup.js';
-
+// coutup.js options
 const options = {
   decimalPlaces: 2,
-  // ... coutup.js other options
+  // ...
 }
 const onInit = (countup: CountUp) => {
   console.log('init', countup)
