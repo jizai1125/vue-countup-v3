@@ -35,11 +35,17 @@ const emits = defineEmits<{
   // countup 初始化完成
   (event: 'init', countup: CountUp): CountUp
   // 计数完成
-  (event: 'finished'): void
+  // (event: 'finished'): void
 }>()
 
 let ElRef = ref<HTMLElement>()
 let countUp = ref<CountUp>()
+
+// 开始动画
+const startAnim = () => {
+  countUp.value?.start()
+  // checkAnimateState()
+}
 
 const initCountUp = () => {
   if (!ElRef.value) return
@@ -57,44 +63,16 @@ const initCountUp = () => {
   }
   emits('init', countUp.value)
 }
-// 开始动画
-const startAnim = () => {
-  countUp.value?.start()
-  checkAnimateState()
-}
-// 循环动画
-let loopCount = 1
-const loopAnim = () => {
-  loopCount++
-  finished.value = false
-  countUp.value?.reset()
-  startAnim()
-}
-// 判断动画是否结束，由于 coutup 内部未有结束状态记录，这里利用定时器去检查值
-const finished = ref(false)
-let timerId: number
-const checkAnimateState = () => {
-  clearTimeout(timerId)
-  timerId = window.setTimeout(() => {
-    // console.log('check')
-    finished.value = countUp.value?.frameVal == props.endVal
-    if (!finished.value) {
-      checkAnimateState()
+
+// 监听 endVal, autoplay 为 true 时，重启动画
+watch(
+  () => props.endVal,
+  (value) => {
+    if (props.autoplay) {
+      countUp.value?.update(value)
     }
-  }, 1000)
-}
-watch(finished, (flag) => {
-  if (!flag) return
-  // console.log('finished', flag)
-  // console.log('loop', loopCount)
-  emits('finished')
-  const isBool = typeof props.loop === 'boolean'
-  if ((isBool && props.loop) || props.loop > loopCount) {
-    loopAnim()
-  } else {
-    loopCount = 1
   }
-})
+)
 
 onMounted(() => {
   initCountUp()
@@ -102,6 +80,40 @@ onMounted(() => {
     startAnim()
   }
 })
+
+// 循环动画
+// let loopCount = 1
+// const loopAnim = () => {
+//   loopCount++
+//   finished.value = false
+//   countUp.value?.reset()
+//   startAnim()
+// }
+// // 判断动画是否结束，由于 coutup 内部未有结束状态记录，这里利用定时器去检查值
+// const finished = ref(false)
+// let timerId: number
+// const checkAnimateState = () => {
+//   clearTimeout(timerId)
+//   timerId = window.setTimeout(() => {
+//     // console.log('check')
+//     finished.value = countUp.value?.frameVal == props.endVal
+//     if (!finished.value) {
+//       checkAnimateState()
+//     }
+//   }, 1000)
+// }
+// watch(finished, (flag) => {
+//   if (!flag) return
+//   // console.log('finished', flag)
+//   // console.log('loop', loopCount)
+//   emits('finished')
+//   const isBool = typeof props.loop === 'boolean'
+//   if ((isBool && props.loop) || props.loop > loopCount) {
+//     loopAnim()
+//   } else {
+//     loopCount = 1
+//   }
+// })
 </script>
 
 <template>
