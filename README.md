@@ -40,9 +40,6 @@ import CountUp from 'vue-countup-v3'
   const onInit = (countup: ICountUp) => {
     console.log('init', countup)
   }
-  const onFinished = () => {
-    console.log('finished')
-  }
 </script>
 
 <template>
@@ -51,30 +48,32 @@ import CountUp from 'vue-countup-v3'
     :duration="3"
     :loop="2"
     :options="options"
-    @init="onInit"
-    @finished="onFinished"></count-up>
+    @init="onInit"></count-up>
 </template>
 ```
 
 </details>
 
-## 组件属性（Component Properties）
+## 属性（Properties）
 
 **以下属性同 coutup.js 配置项（same as countup.js properties）**
 
-|   Name   |       Type       | Default |                             Description                              |
-| :------: | :--------------: | :-----: | :------------------------------------------------------------------: |
-|  endVal  | Number \| String |    -    |                                结束值                                |
-| startVal | Number \| String |    0    |                                起始值                                |
-| duration |      Number      |   2.5   |                          动画时长，单位：秒                          |
+|   Name   |       Type       | Default |                         Description                          |
+| :------: | :--------------: | :-----: | :----------------------------------------------------------: |
+|  endVal  | Number \| String |    -    |  结束值（当 autoplay 为 true时，自动监听该值变化开启动画）   |
+| startVal | Number \| String |    0    |                            起始值                            |
+| duration |      Number      |   2.5   |                      动画时长，单位：秒                      |
 | options  |      Object      |    -    | [countUp.js](https://github.com/inorganik/countUp.js) options 配置项 |
 
-**以下为组件拓展属性（extension properties）**
+**以下为组件特有属性（extension properties）**
 
-|   Name   |       Type        | Default |              Description               |
-| :------: | :---------------: | :-----: | :------------------------------------: |
-| autoplay |      Boolean      |  true   |              是否自动计数              |
-|   loop   | Boolean \| Number |  false  | 为数值时代表次数，为 `true` 时无限循环 |
+|   Name   |  Type   | Default | Description  |
+| :------: | :-----: | :-----: | :----------: |
+| autoplay | Boolean |  true   | 是否自动计数 |
+
+## 事件（Events）
+
+
 
 ## coutup.js 说明
 

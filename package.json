@@ -7,7 +7,9 @@
     "countup",
     "vue-countup",
     "vue3-countup",
-    "library"
+    "vue-count",
+    "vue-count-to",
+    "vue3-count-to"
   ],
   "auther": "jizai <1414589221@qq.com>",
   "main": "dist/vue-countup-v3.umd.js",

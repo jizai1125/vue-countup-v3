@@ -1,27 +1,28 @@
 <script setup lang="ts">
 import CountUp from '../src/countup.vue'
 import type { CountUp as ICountUp } from 'countup.js'
+import { ref } from 'vue'
 const options = {
   decimalPlaces: 2
 }
 const onInit = (countup: ICountUp) => {
   console.log('init', countup)
 }
-const onFinished = () => {
-  console.log('finished')
+const endVal = ref(100)
+const changEndVal = () => {
+  endVal.value = 2000
 }
 </script>
 
 <template>
   <div>vue countup</div>
+  <button @click="changEndVal">change endVal {{ endVal }}</button>
   <count-up
     class="coutup"
-    :end-val="2000"
+    :end-val="endVal"
     :duration="3"
-    :loop="2"
     :options="options"
-    @init="onInit"
-    @finished="onFinished"></count-up>
+    @init="onInit"></count-up>
 </template>
 
 <style>
