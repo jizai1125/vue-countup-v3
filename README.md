@@ -26,7 +26,7 @@ import CountUp from 'vue-countup-v3'
 ```
 
 <details>
-<summary style="font-weight:bold;">完整示例（full usage）</summary>
+<summary><strong>完整示例（full usage）</strong></summary>
 
 ```html
 <script setup lang="ts">
