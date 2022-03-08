@@ -57,17 +57,15 @@ const initCountUp = () => {
   }
   emits('init', countUp.value)
 }
-let loopCount = 0
 // 开始动画
 const startAnim = () => {
   countUp.value?.start()
-  loopCount++
   checkAnimateState()
 }
 // 循环动画
+let loopCount = 1
 const loopAnim = () => {
   loopCount++
-  // console.log('loop', loopCount)
   finished.value = false
   countUp.value?.reset()
   startAnim()
@@ -78,7 +76,7 @@ let timerId: number
 const checkAnimateState = () => {
   clearTimeout(timerId)
   timerId = window.setTimeout(() => {
-    // console.log('check');
+    // console.log('check')
     finished.value = countUp.value?.frameVal == props.endVal
     if (!finished.value) {
       checkAnimateState()
@@ -88,12 +86,13 @@ const checkAnimateState = () => {
 watch(finished, (flag) => {
   if (!flag) return
   // console.log('finished', flag)
+  // console.log('loop', loopCount)
   emits('finished')
   const isBool = typeof props.loop === 'boolean'
-  if (props.loop) {
-    if (isBool || props.loop > loopCount) {
-      loopAnim()
-    }
+  if ((isBool && props.loop) || props.loop > loopCount) {
+    loopAnim()
+  } else {
+    loopCount = 1
   }
 })
 
