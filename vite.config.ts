@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
+import pkg from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,8 +9,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, './src/countup.vue'),
-      name: 'vue-countup-v3',
-      fileName: (format) => `vue-countup-v3.${format}.js`
+      name: 'VueCountupV3',
+      fileName: (format) => `${pkg.name}.${format}.js`
     },
     rollupOptions: {
       external: ['vue', 'countup.js'],

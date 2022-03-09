@@ -40,15 +40,16 @@
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "prepare": "husky install"
   },
-  "dependencies": {
-    "countup.js": "^2.1.0",
-    "vue": "^3.2.25"
+  "peerDependencies": {
+    "countup.js": "latest",
+    "vue": "latest"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "@vitejs/plugin-vue": "^2.2.0",
+    "countup.js": "^2.1.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -58,6 +59,7 @@
     "prettier": "^2.5.1",
     "typescript": "^4.5.4",
     "vite": "^2.8.0",
+    "vue": "^3.2.31",
     "vue-tsc": "^0.29.8"
   },
   "lint-staged": {
