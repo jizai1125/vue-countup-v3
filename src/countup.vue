@@ -7,7 +7,6 @@ export default {
 import { onMounted, ref, watch } from 'vue'
 import { CountUp } from 'countup.js'
 import type { CountUpOptions } from 'countup.js'
-
 const props = withDefaults(
   defineProps<{
     // 结束数值
@@ -19,7 +18,7 @@ const props = withDefaults(
     // 是否自动计数
     autoplay?: boolean
     // 循环次数，有限次数 / 无限循环
-    loop?: boolean | number
+    // loop?: boolean | number
     // countup 配置项
     options?: CountUpOptions
   }>(),
@@ -27,7 +26,7 @@ const props = withDefaults(
     startVal: 0,
     duration: 2.5,
     autoplay: true,
-    loop: false,
+    // loop: false,
     options: undefined
   }
 )

@@ -46,7 +46,6 @@ import CountUp from 'vue-countup-v3'
   <count-up
     :end-val="2000"
     :duration="3"
-    :loop="2"
     :options="options"
     @init="onInit"></count-up>
 </template>
