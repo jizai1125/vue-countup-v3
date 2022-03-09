@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/*.d.ts", "vue-countup-v3.d.ts", "env.d.ts"],
+  "include": ["src/*", "types/*", "env.d.ts"],
    "exclude": [
     "node_modules"
   ]
