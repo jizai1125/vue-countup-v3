@@ -1,3 +1,4 @@
+export * from 'countup.js';
 import { CountUp } from 'countup.js';
 import type { CountUpOptions } from 'countup.js';
 declare const _default: import("vue").DefineComponent<{
