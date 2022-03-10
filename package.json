@@ -41,8 +41,8 @@
     "prepare": "husky install"
   },
   "peerDependencies": {
-    "countup.js": "latest",
-    "vue": "latest"
+    "countup.js": "^2",
+    "vue": "^3"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
