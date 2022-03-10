@@ -1,14 +1,16 @@
 # vue-countup-v3
 
->  Vue 3 component wrap for *countUp.js*
+>  Vue 3 component wrap for *countUp.js* 
+
+## [Try the demo](https://github.com/jizai1125/vue-countup-v3/demo/)
 
 ## Installation
 
 ```bash
 # npm
-$ npm i countup.js vue-countup-v3 -S
+$ npm i vue-countup-v3
 # or yarn
-$ yarn add countup.js vue-countup-v3 -S
+$ yarn add vue-countup-v3
 ```
 
 ## Usage
@@ -21,7 +23,7 @@ import CountUp from 'vue-countup-v3'
 </script>
 
 <template>
-  <count-up :end-val="2000"></count-up>
+  <count-up :end-val="2000" ></count-up>
 </template>
 ```
 
@@ -59,7 +61,7 @@ import CountUp from 'vue-countup-v3'
 
 |   Name   |       Type       | Default |                         Description                          |
 | :------: | :--------------: | :-----: | :----------------------------------------------------------: |
-|  endVal  | Number \| String |    -    |  结束值（当 autoplay 为 true时，自动监听该值变化开启动画）   |
+|  endVal  | Number \| String |    -    |                            结束值                            |
 | startVal | Number \| String |    0    |                            起始值                            |
 | duration |      Number      |   2.5   |                      动画时长，单位：秒                      |
 | options  |      Object      |    -    | [countUp.js](https://github.com/inorganik/countUp.js) options 配置项 |
@@ -71,6 +73,19 @@ import CountUp from 'vue-countup-v3'
 | autoplay | Boolean |  true   | 是否自动计数 |
 
 ## 事件（Events）
+
+| Name  |        Description         |    return    |
+| :---: | :------------------------: | :----------: |
+| @init | CountUp 实例初始化完成触发 | CountUp 实例 |
+
+## 插槽（slots）
+
+当 prefix 或者 suffix 需要与数值样式区分开时，可使用插槽的方式取代 options 配置
+
+|  Name  | Description |
+| :----: | :---------: |
+| prefix |  前缀插槽   |
+| suffix |  后缀插槽   |
 
 
 
@@ -103,6 +118,12 @@ interface CountUpOptions {
 ```
 
 ### **方法（Methods）**
+
+开始动画
+
+```js
+countUp.start()
+```
 
 Toggle pause/resume 切换暂停/恢复
 

@@ -1,6 +1,6 @@
 {
   "name": "vue-countup-v3",
-  "version": "0.0.9",
+  "version": "0.0.12",
   "description": "Vue 3 component wrap for countUp.js",
   "keywords": [
     "vue3",
@@ -32,7 +32,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "dev": "vite serve ./demo -c ./vite.config.ts",
+    "dev": "vite",
     "build": "vite build && npm run build:dts",
     "build:dts": "vue-tsc --declaration --emitDeclarationOnly --declarationDir dist",
     "preview": "vite preview",
@@ -40,8 +40,10 @@
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "prepare": "husky install"
   },
+  "dependencies": {
+    "countup.js": "^2.1.0"
+  },
   "peerDependencies": {
-    "countup.js": "^2",
     "vue": "^3"
   },
   "devDependencies": {
@@ -49,7 +51,6 @@
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "@vitejs/plugin-vue": "^2.2.0",
-    "countup.js": "^2.1.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
