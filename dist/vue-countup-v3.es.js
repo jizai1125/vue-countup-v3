@@ -164,4 +164,4 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     };
   }
 }));
-export { CountUp, _sfc_main as default };
+export { _sfc_main as default };

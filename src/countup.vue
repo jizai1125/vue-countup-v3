@@ -1,5 +1,5 @@
 <script lang="ts">
-export * from 'countup.js'
+export type { CountUp as ICountUp, CountUpOptions } from 'countup.js'
 export default {
   name: 'CountUp'
 }
