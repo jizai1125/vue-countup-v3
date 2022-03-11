@@ -17,8 +17,9 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-import { defineComponent, ref, watch, onMounted, openBlock, createElementBlock } from "vue";
+import { defineComponent, ref, watch, onMounted, openBlock, createElementBlock, renderSlot, createElementVNode } from "vue";
 import { CountUp } from "countup.js";
+const _hoisted_1 = { class: "countup-wrap" };
 const __default__ = {
   name: "CountUp"
 };
@@ -31,7 +32,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     options: { default: void 0 }
   },
   emits: ["init"],
-  setup(__props, { emit: emits }) {
+  setup(__props, { expose, emit: emits }) {
     const props = __props;
     let ElRef = ref();
     let countUp = ref();
@@ -55,6 +56,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
       }
       emits("init", countUp.value);
     };
+    const restart = () => {
+      initCountUp();
+      startAnim();
+    };
     watch(() => props.endVal, (value) => {
       var _a;
       if (props.autoplay) {
@@ -67,11 +72,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
         startAnim();
       }
     });
+    expose({
+      init: initCountUp,
+      restart
+    });
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        ref_key: "ElRef",
-        ref: ElRef
-      }, null, 512);
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        renderSlot(_ctx.$slots, "prefix"),
+        createElementVNode("span", {
+          ref_key: "ElRef",
+          ref: ElRef
+        }, null, 512),
+        renderSlot(_ctx.$slots, "suffix")
+      ]);
     };
   }
 }));

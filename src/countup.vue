@@ -1,4 +1,5 @@
 <script lang="ts">
+export type { CountUp as ICountUp, CountUpOptions } from 'countup.js'
 export default {
   name: 'CountUp'
 }
@@ -7,6 +8,7 @@ export default {
 import { onMounted, ref, watch } from 'vue'
 import { CountUp } from 'countup.js'
 import type { CountUpOptions } from 'countup.js'
+
 const props = withDefaults(
   defineProps<{
     // 结束数值
@@ -37,21 +39,20 @@ const emits = defineEmits<{
   // (event: 'finished'): void
 }>()
 
-let ElRef = ref<HTMLElement>()
+let elRef = ref<HTMLElement>()
 let countUp = ref<CountUp>()
 
-// 开始动画
 const startAnim = () => {
   countUp.value?.start()
   // checkAnimateState()
 }
 
 const initCountUp = () => {
-  if (!ElRef.value) return
+  if (!elRef.value) return
   const startVal = Number(props.startVal)
   const endVal = Number(props.endVal)
   const duration = Number(props.duration)
-  countUp.value = new CountUp(ElRef.value, endVal, {
+  countUp.value = new CountUp(elRef.value, endVal, {
     startVal,
     duration,
     ...props.options
@@ -61,6 +62,11 @@ const initCountUp = () => {
     return
   }
   emits('init', countUp.value)
+}
+
+const restart = () => {
+  initCountUp()
+  startAnim()
 }
 
 // 监听 endVal, autoplay 为 true 时，重启动画
@@ -78,6 +84,11 @@ onMounted(() => {
   if (props.autoplay) {
     startAnim()
   }
+})
+
+defineExpose({
+  init: initCountUp,
+  restart
 })
 
 // 循环动画
@@ -116,5 +127,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="ElRef"></div>
+  <div class="countup-wrap">
+    <slot name="prefix"></slot>
+    <span ref="elRef"> </span>
+    <slot name="suffix"></slot>
+  </div>
 </template>
