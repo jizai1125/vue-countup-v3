@@ -1,14 +1,16 @@
 # vue-countup-v3
 
->  Vue 3 component wrap for *countUp.js*
+> Vue 3 component wrap for _countUp.js_ , and expand some features
+
+## [Try the demo](https://jizai1125.github.io/vue-countup-v3/demo/)
 
 ## Installation
 
 ```bash
 # npm
-$ npm i countup.js vue-countup-v3 -S
+$ npm i countup.js vue-countup-v3
 # or yarn
-$ yarn add countup.js vue-countup-v3 -S
+$ yarn add countup.js vue-countup-v3
 ```
 
 ## Usage
@@ -26,45 +28,66 @@ import CountUp from 'vue-countup-v3'
 ```
 
 <details>
+<summary><strong>插槽示例（slot usage）</strong></summary>
+当 prefix 或者 suffix 需要与数值样式区分开时，可使用插槽的方式取代 options 配置。
+
+```html
+<script setup lang="ts">
+  import CountUp from 'vue-countup-v3'
+</script>
+
+<template>
+  <count-up :end-val="2000">
+    <template #prefix>
+      <span style="color: orange">prefix</span>
+    </template>
+    <template #suffix>
+      <span style="color: red">prefix</span>
+    </template>
+  </count-up>
+</template>
+```
+
+<details>
 <summary><strong>完整示例（full usage）</strong></summary>
 
 ```html
 <script setup lang="ts">
   import CountUp from 'vue-countup-v3'
-  import type { CountUp as ICountUp } from 'countup.js'
+  import type { ICountUp, CountUpOptions } from 'vue-countup-v3'
   // coutup.js options
-  const options = {
+  const options: CountUpOptions = {
     decimalPlaces: 2
     // ...
   }
-  const onInit = (countup: ICountUp) => {
-    console.log('init', countup)
+  let countUp: ICountUp
+  const onInit = (ctx: ICountUp) => {
+    console.log('init', ctx)
+    countUp = ctx
   }
 </script>
 
 <template>
-  <count-up
-    :end-val="2000"
-    :duration="3"
-    :options="options"
-    @init="onInit"></count-up>
+  <count-up :end-val="2000" :duration="3" :options="options" @init="onInit"></count-up>
 </template>
 ```
 
 </details>
 
+</details>
+
 ## 属性（Properties）
 
-**以下属性同 coutup.js 配置项（same as countup.js properties）**
+以下属性同 coutup.js 配置项（same as countup.js properties）
 
-|   Name   |       Type       | Default |                         Description                          |
-| :------: | :--------------: | :-----: | :----------------------------------------------------------: |
-|  endVal  | Number \| String |    -    |  结束值（当 autoplay 为 true时，自动监听该值变化开启动画）   |
-| startVal | Number \| String |    0    |                            起始值                            |
-| duration |      Number      |   2.5   |                      动画时长，单位：秒                      |
+|   Name   |       Type       | Default |                             Description                              |
+| :------: | :--------------: | :-----: | :------------------------------------------------------------------: |
+|  endVal  | Number \| String |    -    |                                结束值                                |
+| startVal | Number \| String |    0    |                                起始值                                |
+| duration |      Number      |   2.5   |                          动画时长，单位：秒                          |
 | options  |      Object      |    -    | [countUp.js](https://github.com/inorganik/countUp.js) options 配置项 |
 
-**以下为组件特有属性（extension properties）**
+以下为组件特有属性（extension properties）
 
 |   Name   |  Type   | Default | Description  |
 | :------: | :-----: | :-----: | :----------: |
@@ -72,7 +95,16 @@ import CountUp from 'vue-countup-v3'
 
 ## 事件（Events）
 
+| Name  |        Description         |    return    |
+| :---: | :------------------------: | :----------: |
+| @init | CountUp 实例初始化完成触发 | CountUp 实例 |
 
+## 插槽（slots）
+
+|  Name  | Description |
+| :----: | :---------: |
+| prefix |  前缀插槽   |
+| suffix |  后缀插槽   |
 
 ## coutup.js 说明
 
@@ -103,6 +135,12 @@ interface CountUpOptions {
 ```
 
 ### **方法（Methods）**
+
+开始计数
+
+```js
+countUp.start()
+```
 
 Toggle pause/resume 切换暂停/恢复
 

@@ -1,42 +1,26 @@
 <script setup lang="ts">
-import CountUp from '../dist/vue-countup-v3.es'
-// import CountUp from '../src/countup.vue'
-import type { CountUp as ICountUp } from 'countup.js'
+import CountUp from '../src/countup.vue'
+import type { ICountUp, CountUpOptions } from '../src/countup.vue'
 import { ref } from 'vue'
-const options = {
-  decimalPlaces: 2
+
+const options: CountUpOptions = {
+  startVal: 1
 }
-const onInit = (countup: ICountUp) => {
-  console.log('init', countup)
-}
-const endVal = ref(100)
-const changEndVal = () => {
-  endVal.value = 2000
+let countUp: ICountUp
+const onInit = (ctx: ICountUp) => {
+  countUp = ctx
 }
 </script>
 
 <template>
-  <div>vue countup</div>
-  <button @click="changEndVal">change endVal {{ endVal }}</button>
-  <count-up
-    class="coutup"
-    :end-val="endVal"
-    :duration="3"
-    :options="options"
-    @init="onInit"></count-up>
+  <count-up :end-val="2000" duration="20" :options="options" @init="onInit">
+    <template #prefix>
+      <span style="color: orange">prefix</span>
+    </template>
+    <template #suffix>
+      <span style="color: red">prefix</span>
+    </template>
+  </count-up>
 </template>
 
-<style>
-.coutup {
-  color: red;
-  font-size: 32px;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style scoped></style>

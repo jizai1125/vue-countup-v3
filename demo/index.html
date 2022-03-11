@@ -1,13 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <meta charset="utf-8" />
+    <title>vue-countup-v3</title>
+    <link rel="stylesheet" href="./index.css" />
   </head>
+
   <body>
-    <div id="app"></div>
-    <script type="module" src="./main.ts"></script>
+    <script src="https://unpkg.com/vue@3.2.31"></script>
+    <script src="https://inorganik.github.io/countUp.js/dist/countUp.umd.js"></script>
+    <script src="../dist/vue-countup-v3.iife.js"></script>
+    <div id="app">
+      <a
+        href="https://github.com/jizai1125/vue-countup-v3"
+        class="github-corner"
+        target="_blank"
+        aria-label="View source on Github">
+        <svg
+          width="80"
+          height="80"
+          viewBox="0 0 250 250"
+          :style="{fill: color, color: '#fff', position: 'absolute', top: 0, border: 0, right: 0}"
+          aria-hidden="true">
+          <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+          <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor"
+            style="transform-origin: 130px 106px"
+            class="octo-arm"></path>
+          <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor"
+            class="octo-body"></path>
+        </svg>
+      </a>
+      <color-title title="vue-countup-v3" :color="color"></color-title>
+      <div class="container">
+        <div class="example-item">
+          <h3>simple example</h3>
+          <code
+            >&lt;count-up :startVal=&#x27;{{startVal1}}&#x27; :endVal=&#x27;{{endVal1}}&#x27;
+            :duration="4"&gt;&lt;/count-up&gt;</code
+          >
+          <count-up
+            ref="example1"
+            class="example1"
+            :start-val="startVal1"
+            :end-val="endVal1"
+            :duration="4"
+            @init="onInit"></count-up>
+          <div class="example-btn" @click="restart">reset & start</div>
+          <div class="example-btn" @click="changeExampleEndVal">change end-val</div>
+          <div class="example-btn" @click="incrementalUpdate">incremental update</div>
+        </div>
+        <div class="example-item">
+          <h3>count down example</h3>
+          <code>
+            &lt;count-up :startVal=&#x27;2022&#x27; :endVal=&#x27;0&#x27;
+            :duration="8"&gt;&lt;/count-up&gt;</code
+          >
+          <count-up
+            ref="example2"
+            class="example2"
+            :start-val="2022"
+            :end-val="0"
+            :duration="8"
+            @init="onInit2"></count-up>
+          <div class="example-btn" @click="restart2">reset & start</div>
+        </div>
+        <div class="example-item">
+          <h3>custom example</h3>
+          <count-up
+            ref="example3"
+            class="example3"
+            :start-val="start_val"
+            :end-val="end_val"
+            :duration="duration"
+            :autoplay="false"
+            :options="options"
+            @init="onInit3">
+          </count-up>
+          <div>
+            <label class="label" for="startValInput"
+              >startVal: <input type="number" v-model.number="start_val" name="startValInput"
+            /></label>
+            <label class="label" for="endValInput"
+              >endVal: <input type="number" v-model.number="setEndVal" name="endVaInput"
+            /></label>
+            <label class="label" for="durationInput"
+              >duration:
+              <input type="number" v-model.number="setDuration" name="durationInput" /> s</label
+            >
+            <br />
+            <label class="label" for="decimalInput"
+              >decimal: <input v-model.number="setDecimal" name="decimalInput"
+            /></label>
+            <label class="label" for="decimalPlaces"
+              >decimalPlaces:
+              <input type="number" v-model.number="setDecimalPlaces" name="decimalPlaces"
+            /></label>
+            <label class="label" for="separatorInput"
+              >separator: <input v-model="setSeparator" name="separatorInput"
+            /></label>
+            <label class="label" for="prefixInput"
+              >prefix: <input v-model="setPrefix" name="prefixInput"
+            /></label>
+            <label class="label" for="suffixInput"
+              >suffix: <input v-model="setSuffix" name="suffixInput"
+            /></label>
+          </div>
+          <div class="btns">
+            <div class="startBtn example-btn" @click="start3">start</div>
+            <div class="pause-resume-btn example-btn" @click="pauseResume">pause/resume</div>
+            <div class="pause-resume-btn example-btn" @click="reset3">reset</div>
+          </div>
+          <code
+            >&lt;count-up :start-val=&#x27;{{start_val}}&#x27; :end-val=&#x27;{{end_val}}&#x27;
+            :duration=&#x27;{{duration}}&#x27; :autoplay=“false”&gt;&lt;/count-up&gt;</code
+          >
+          <br />
+          <div style="margin-bottom: 10px">
+            countup.js options
+            <a href="https://github.com/inorganik/countUp.js#usage" target="_blank"> see more </a>
+          </div>
+          <code>{{ options }}</code>
+        </div>
+      </div>
+    </div>
+    <script>
+      const { ref, computed } = Vue
+      const App = {
+        name: 'App',
+        setup() {
+          // simple example
+          const startVal1 = ref(0)
+          const endVal1 = ref(2022)
+          let countupCtx
+          const onInit = (countup) => {
+            countupCtx = countup
+          }
+          const restart = () => {
+            countupCtx.reset()
+            countupCtx.start()
+          }
+          const changeExampleEndVal = () => {
+            endVal1.value += 1000
+          }
+          const incrementalUpdate = () => {
+            startVal1.value = endVal1.value
+            endVal1.value += 1000
+          }
+          // count down example
+          let countupCtx2
+          const onInit2 = (countup) => {
+            countupCtx2 = countup
+          }
+          const restart2 = () => {
+            countupCtx2.reset()
+            countupCtx2.start()
+          }
+          // custom example
+          const example3 = ref()
+          const setStartVal = ref(0)
+          const setEndVal = ref(2022)
+          const setDuration = ref(4)
+          const setDecimal = ref('.')
+          const setDecimalPlaces = ref(2)
+          const setSeparator = ref(',')
+          const setSuffix = ref('rmb')
+          const setPrefix = ref('¥')
+          let countupCtx3
+          const onInit3 = (countup) => {
+            countupCtx3 = countup
+          }
+          const start3 = () => {
+            example3.value.restart()
+          }
+          const reset3 = () => {
+            setStartVal.value = 0
+            setEndVal.value = 2022
+            setDuration.value = 4
+            setDecimal.value = '.'
+            setDecimalPlaces.value = 2
+            setSeparator.value = ','
+            setSuffix.value = 'rmb'
+            setPrefix.value = '¥'
+            example3.value.init()
+          }
+          const pauseResume = () => {
+            countupCtx3.pauseResume()
+          }
+          const start_val = computed(() => {
+            return setStartVal.value || 0
+          })
+          const end_val = computed(() => {
+            return setEndVal.value || 0
+          })
+          const duration = computed(() => {
+            return setDuration.value || 4
+          })
+          const decimals = computed(() => {
+            if (!setDecimalPlaces.value) return 0
+            if (etDecimals.value < 0 || setDecimalPlaces.value > 20) {
+              alert('digits argument must be between 0 and 20')
+              return 0
+            }
+            return setDecimalPlaces.value
+          })
+
+          const options = computed(() => {
+            return {
+              prefix: setPrefix.value,
+              suffix: setSuffix.value,
+              separator: setSeparator.value,
+              decimal: setDecimal.value,
+              decimalPlaces: setDecimalPlaces.value
+            }
+          })
+          const color = ref(getRandomColor())
+          setInterval(() => {
+            color.value = getRandomColor()
+          }, 1000)
+          return {
+            color,
+            setDecimal,
+            reset3,
+            example3,
+            options,
+            start_val,
+            pauseResume,
+            start3,
+            onInit3,
+            decimals,
+            duration,
+            end_val,
+            onInit2,
+            restart2,
+            incrementalUpdate,
+            setStartVal,
+            setEndVal,
+            setDuration,
+            setDecimalPlaces,
+            setSeparator,
+            setSuffix,
+            setPrefix,
+            startVal1,
+            endVal1,
+            onInit,
+            restart,
+            changeExampleEndVal
+          }
+        }
+      }
+
+      const ColorTitle = {
+        name: 'ColorTitle',
+        props: {
+          title: String,
+          color: String
+        },
+        setup(props) {
+          return () => Vue.h('h1', { style: { color: props.color } }, props.title)
+        }
+      }
+      const app = Vue.createApp(App)
+      // vue-countup-v3 暴露的全局变量 VueCountUp
+      app.component('CountUp', VueCountUp)
+      app.component('ColorTitle', ColorTitle)
+
+      app.mount('#app')
+
+      function getRandomColor() {
+        const colors = [
+          '#f44336',
+          '#e91e63',
+          '#9c27b0',
+          '#673ab7',
+          '#3f51b5',
+          '#2196f3',
+          '#00bcd4',
+          '#009688',
+          '#8bc34a',
+          '#4caf50',
+          '#cddc39',
+          '#ffc107',
+          '#ff9800',
+          '#ff5722',
+          '#795548',
+          '#9e9e9e',
+          '#607d8b'
+        ]
+        const colorLen = colors.length
+        const idx = parseInt(Math.random() * (colorLen - 1))
+        return colors[idx]
+      }
+    </script>
   </body>
 </html>
