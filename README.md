@@ -48,6 +48,8 @@ import CountUp from 'vue-countup-v3'
 </template>
 ```
 
+</details>
+
 <details>
 <summary><strong>完整示例（full usage）</strong></summary>
 
@@ -71,8 +73,6 @@ import CountUp from 'vue-countup-v3'
   <count-up :end-val="2000" :duration="3" :options="options" @init="onInit"></count-up>
 </template>
 ```
-
-</details>
 
 </details>
 
