@@ -1,7 +1,6 @@
-# vue-countup-v3
+# vue-countup-v3 [![npm](https://img.shields.io/npm/v/vue-countup-v3?color=green)](https://www.npmjs.com/package/vue-countup-v3) ![](https://img.shields.io/bundlephobia/min/vue-countup-v3)
 
 > Vue 3 component wrap for _countUp.js_ , and expand some features
-
 ## [Try the demo](https://jizai1125.github.io/vue-countup-v3/demo/)
 
 ## Installation
