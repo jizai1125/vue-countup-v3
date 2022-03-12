@@ -5,11 +5,16 @@
 
 ## Installation
 
+npm
+
 ```bash
-# npm
-$ npm i countup.js vue-countup-v3
-# or yarn
-$ yarn add countup.js vue-countup-v3
+npm i countup.js vue-countup-v3
+```
+
+yarn
+
+```bash
+yarn add countup.js vue-countup-v3
 ```
 
 ## Usage
@@ -104,6 +109,10 @@ import CountUp from 'vue-countup-v3'
 | :----: | :---------: |
 | prefix |  前缀插槽   |
 | suffix |  后缀插槽   |
+
+
+
+---
 
 ## coutup.js 说明
 
