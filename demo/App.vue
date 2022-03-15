@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import CountUp from '../src/countup.vue'
 import type { ICountUp, CountUpOptions } from '../src/countup.vue'
-import { ref } from 'vue'
 
 const options: CountUpOptions = {
   startVal: 1

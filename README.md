@@ -97,22 +97,24 @@ import CountUp from 'vue-countup-v3'
 | :------: | :-----: | :-----: | :----------: |
 | autoplay | Boolean |  true   | 是否自动计数 |
 
+## 插槽（slots）
+
+|  Name  | Description |
+| :----: | :---------: |
+| prefix |    前缀     |
+| suffix |    后缀     |
+
 ## 事件（Events）
 
 | Name  |        Description         |    return    |
 | :---: | :------------------------: | :----------: |
 | @init | CountUp 实例初始化完成触发 | CountUp 实例 |
 
-## 插槽（slots）
-
-|  Name  | Description |
-| :----: | :---------: |
-| prefix |  前缀插槽   |
-| suffix |  后缀插槽   |
-
 
 
 ---
+
+
 
 ## coutup.js 说明
 

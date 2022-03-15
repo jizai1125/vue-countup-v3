@@ -44,7 +44,6 @@ let countUp = ref<CountUp>()
 
 const startAnim = () => {
   countUp.value?.start()
-  // checkAnimateState()
 }
 
 const initCountUp = () => {
@@ -69,7 +68,7 @@ const restart = () => {
   startAnim()
 }
 
-// 监听 endVal, autoplay 为 true 时，重启动画
+// endVal & autoplay 为 true 时，重新计数
 watch(
   () => props.endVal,
   (value) => {
