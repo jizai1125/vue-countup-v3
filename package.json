@@ -1,7 +1,7 @@
 {
   "name": "vue-countup-v3",
   "version": "0.1.2",
-  "description": "Vue 3 component wrap for countUp.js",
+  "description": "Vue 3 component wrap for countUp.js，and expand some features！",
   "keywords": [
     "vue3",
     "countup",
