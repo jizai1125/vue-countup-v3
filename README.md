@@ -71,10 +71,19 @@ import CountUp from 'vue-countup-v3'
     console.log('init', ctx)
     countUp = ctx
   }
+  const onFinished = () => {
+    console.log('finished')
+  }
 </script>
 
 <template>
-  <count-up :end-val="2000" :duration="3" :options="options" @init="onInit"></count-up>
+  <count-up 
+    :end-val="2000"
+    :duration="2.5"
+    :options="options"
+    :loop="2"
+    @init="onInit"
+    @finished="onFinished"></count-up>
 </template>
 ```
 
@@ -93,15 +102,17 @@ import CountUp from 'vue-countup-v3'
 
 以下为组件特有属性（extension properties）
 
-|   Name   |  Type   | Default | Description  |
-| :------: | :-----: | :-----: | :----------: |
-| autoplay | Boolean |  true   | 是否自动计数 |
+|   Name   |       Type        | Default |          Description          |
+| :------: | :---------------: | :-----: | :---------------------------: |
+| autoplay |      Boolean      |  true   |         是否自动计数          |
+|   loop   | Boolean \| Number |  false  | 循环次数，有限次数 / 无限循环 |
 
 ## 事件（Events）
 
-| Name  |        Description         |    return    |
-| :---: | :------------------------: | :----------: |
-| @init | CountUp 实例初始化完成触发 | CountUp 实例 |
+|   Name    |        Description         |    return    |
+| :-------: | :------------------------: | :----------: |
+|   @init   | CountUp 实例初始化完成触发 | CountUp 实例 |
+| @finished |       计数结束时触发       |      -       |
 
 ## 插槽（slots）
 
@@ -126,7 +137,7 @@ interface CountUpOptions {
   decimalPlaces?: number // number of decimal places (0) 小数点 位数
   duration?: number // animation duration in seconds (2) 动画时长
   useGrouping?: boolean // example: 1,000 vs 1000 (true) 是否使用千分位
-  useEasing?: boolean // ease animation (true) 动画函数类型
+  useEasing?: boolean // ease animation (true) 是否开启动画过渡，默认动画函数为easeOutExpo 
   smartEasingThreshold?: number // smooth easing for large numbers above this if useEasing (999)
   smartEasingAmount?: number // amount to be eased for numbers above threshold (333)
   separator?: string // grouping separator (',') 千位分隔符
