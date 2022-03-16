@@ -21,6 +21,11 @@ declare const _default: import("vue").DefineComponent<{
     } & {
         default: boolean;
     };
+    loop: {
+        type: import("vue").PropType<string | number | boolean>;
+    } & {
+        default: boolean;
+    };
     options: {
         type: import("vue").PropType<CountUpOptions>;
     } & {
@@ -28,6 +33,8 @@ declare const _default: import("vue").DefineComponent<{
     };
 }, () => void, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     init: (countup: CountUp) => void;
+} & {
+    finished: () => void;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     endVal: {
         type: import("vue").PropType<string | number>;
@@ -48,17 +55,24 @@ declare const _default: import("vue").DefineComponent<{
     } & {
         default: boolean;
     };
+    loop: {
+        type: import("vue").PropType<string | number | boolean>;
+    } & {
+        default: boolean;
+    };
     options: {
         type: import("vue").PropType<CountUpOptions>;
     } & {
         default: undefined;
     };
 }>> & {
+    onFinished?: (() => any) | undefined;
     onInit?: ((countup: CountUp) => any) | undefined;
 }, {
     options: CountUpOptions;
     duration: string | number;
     autoplay: boolean;
+    loop: string | number | boolean;
     startVal: string | number;
 }>;
 export default _default;

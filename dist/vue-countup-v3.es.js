@@ -29,24 +29,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     startVal: { default: 0 },
     duration: { default: 2.5 },
     autoplay: { type: Boolean, default: true },
+    loop: { type: [Boolean, Number, String], default: false },
     options: { default: void 0 }
   },
-  emits: ["init"],
+  emits: ["init", "finished"],
   setup(__props, { expose, emit: emits }) {
     const props = __props;
-    let ElRef = ref();
+    let elRef = ref();
     let countUp = ref();
-    const startAnim = () => {
-      var _a;
-      (_a = countUp.value) == null ? void 0 : _a.start();
-    };
     const initCountUp = () => {
-      if (!ElRef.value)
+      if (!elRef.value)
         return;
       const startVal = Number(props.startVal);
       const endVal = Number(props.endVal);
       const duration = Number(props.duration);
-      countUp.value = new CountUp(ElRef.value, endVal, __spreadValues({
+      countUp.value = new CountUp(elRef.value, endVal, __spreadValues({
         startVal,
         duration
       }, props.options));
@@ -56,9 +53,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
       }
       emits("init", countUp.value);
     };
-    const restart = () => {
-      initCountUp();
-      startAnim();
+    const startAnim = (cb) => {
+      var _a;
+      (_a = countUp.value) == null ? void 0 : _a.start(cb);
     };
     watch(() => props.endVal, (value) => {
       var _a;
@@ -66,12 +63,36 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
         (_a = countUp.value) == null ? void 0 : _a.update(value);
       }
     });
+    const finished = ref(false);
+    let loopCount = 0;
+    const loopAnim = () => {
+      loopCount++;
+      startAnim(() => {
+        var _a;
+        (_a = countUp.value) == null ? void 0 : _a.reset();
+        const isTruely = typeof props.loop === "boolean" && props.loop;
+        if (isTruely || props.loop > loopCount) {
+          loopAnim();
+        } else {
+          finished.value = true;
+        }
+      });
+    };
+    watch(finished, (flag) => {
+      if (flag) {
+        emits("finished");
+      }
+    });
     onMounted(() => {
       initCountUp();
       if (props.autoplay) {
-        startAnim();
+        loopAnim();
       }
     });
+    const restart = () => {
+      initCountUp();
+      startAnim();
+    };
     expose({
       init: initCountUp,
       restart
@@ -80,8 +101,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
       return openBlock(), createElementBlock("div", _hoisted_1, [
         renderSlot(_ctx.$slots, "prefix"),
         createElementVNode("span", {
-          ref_key: "ElRef",
-          ref: ElRef
+          ref_key: "elRef",
+          ref: elRef
         }, null, 512),
         renderSlot(_ctx.$slots, "suffix")
       ]);
