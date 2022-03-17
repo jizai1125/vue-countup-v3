@@ -17,8 +17,8 @@ code {
   color: #333;
   font-size: 12px;
 }
-h1,svg {
-  transition: all 1s;
+h1,svg, .example-item {
+  transition: all 6s;
 }
 p,
 ul,
@@ -38,6 +38,7 @@ h3 {
   font-size: 36px;
   color: #494949;
   line-height: 1.1;
+  margin-top: 0;
 }
 
 .github-corner:hover .octo-arm {
@@ -113,7 +114,8 @@ h3 {
 }
 
 .example-item {
-  margin-bottom: 80px;
+  padding: 20px;
+  margin: 0 40px 40px;
 }
 
 .example1 {

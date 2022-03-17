@@ -36,7 +36,7 @@
       </a>
       <color-title title="vue-countup-v3" :color="color"></color-title>
       <div class="container">
-        <div class="example-item">
+        <div class="example-item" :style="{ boxShadow: `0px 8px 12px -7px ${color}` }">
           <h3>simple example</h3>
           <code
             >&lt;count-up :startVal=&#x27;{{startVal1}}&#x27; :endVal=&#x27;{{endVal1}}&#x27;
@@ -53,7 +53,7 @@
           <div class="example-btn" @click="changeExampleEndVal">change end-val</div>
           <div class="example-btn" @click="incrementalUpdate">incremental update</div>
         </div>
-        <div class="example-item">
+        <div class="example-item" :style="{ boxShadow: `0px 8px 12px -7px ${color}` }">
           <h3>count down example</h3>
           <code>
             &lt;count-up :startVal=&#x27;2022&#x27; :endVal=&#x27;0&#x27;
@@ -68,7 +68,7 @@
             @init="onInit2"></count-up>
           <div class="example-btn" @click="restart2">reset & start</div>
         </div>
-        <div class="example-item">
+        <div class="example-item" :style="{ boxShadow: `0px 8px 12px -7px ${color}` }">
           <h3>custom example</h3>
           <count-up
             ref="example3"
@@ -220,7 +220,7 @@
           const color = ref(getRandomColor())
           setInterval(() => {
             color.value = getRandomColor()
-          }, 1000)
+          }, 10000)
           return {
             color,
             setDecimal,
