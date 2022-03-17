@@ -5,7 +5,7 @@ export default {
 }
 </script>
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { CountUp } from 'countup.js'
 import type { CountUpOptions } from 'countup.js'
 
@@ -105,6 +105,26 @@ onMounted(() => {
     loopAnim()
   }
 })
+onUnmounted(() => {
+  cancelAnimationFrame(dalayRafId)
+  countUp.value?.reset()
+})
+
+let dalayRafId: number
+// delay to execute callback function
+const delay = (cb: () => unknown, seconds = 1) => {
+  let startTime: number
+  function count(timestamp: number) {
+    if (!startTime) startTime = timestamp
+    const diff = timestamp - startTime
+    if (diff < seconds * 1000) {
+      dalayRafId = requestAnimationFrame(count)
+    } else {
+      cb()
+    }
+  }
+  dalayRafId = requestAnimationFrame(count)
+}
 
 const restart = () => {
   initCountUp()
@@ -115,25 +135,6 @@ defineExpose({
   init: initCountUp,
   restart
 })
-
-/**
- * delay to execute callback function
- * @param cb
- * @param second
- */
-function delay(cb: () => unknown, second = 1) {
-  let startTime: number
-  function rAF(timestamp: number) {
-    if (!startTime) startTime = timestamp
-    const differ = timestamp - startTime
-    if (differ < second * 1000) {
-      requestAnimationFrame(rAF)
-    } else {
-      cb()
-    }
-  }
-  requestAnimationFrame(rAF)
-}
 </script>
 
 <template>
