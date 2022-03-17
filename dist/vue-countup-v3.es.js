@@ -69,9 +69,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
       loopCount++;
       startAnim(() => {
         var _a;
-        (_a = countUp.value) == null ? void 0 : _a.reset();
         const isTruely = typeof props.loop === "boolean" && props.loop;
         if (isTruely || props.loop > loopCount) {
+          (_a = countUp.value) == null ? void 0 : _a.reset();
           loopAnim();
         } else {
           finished.value = true;
