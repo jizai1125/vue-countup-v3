@@ -82,6 +82,7 @@ import CountUp from 'vue-countup-v3'
     :duration="2.5"
     :options="options"
     :loop="2"
+    :delay="2"
     @init="onInit"
     @finished="onFinished"></count-up>
 </template>
@@ -106,6 +107,7 @@ import CountUp from 'vue-countup-v3'
 | :------: | :---------------: | :-----: | :---------------------------: |
 | autoplay |      Boolean      |  true   |         是否自动计数          |
 |   loop   | Boolean \| Number |  false  | 循环次数，有限次数 / 无限循环 |
+|  delay   |      Number       |    0    | loop 循环的间隔时间，单位：秒 |
 
 ## 插槽（slots）
 

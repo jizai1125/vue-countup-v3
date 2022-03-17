@@ -20,6 +20,7 @@ const onFinished = () => {
     :duration="2.5"
     :options="options"
     :loop="2"
+    :delay="2"
     @init="onInit"
     @finished="onFinished">
     <template #prefix>

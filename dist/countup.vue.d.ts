@@ -26,6 +26,11 @@ declare const _default: import("vue").DefineComponent<{
     } & {
         default: boolean;
     };
+    delay: {
+        type: import("vue").PropType<number>;
+    } & {
+        default: number;
+    };
     options: {
         type: import("vue").PropType<CountUpOptions>;
     } & {
@@ -60,6 +65,11 @@ declare const _default: import("vue").DefineComponent<{
     } & {
         default: boolean;
     };
+    delay: {
+        type: import("vue").PropType<number>;
+    } & {
+        default: number;
+    };
     options: {
         type: import("vue").PropType<CountUpOptions>;
     } & {
@@ -74,5 +84,6 @@ declare const _default: import("vue").DefineComponent<{
     autoplay: boolean;
     loop: string | number | boolean;
     startVal: string | number;
+    delay: number;
 }>;
 export default _default;

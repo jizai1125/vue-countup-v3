@@ -30,6 +30,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     duration: { default: 2.5 },
     autoplay: { type: Boolean, default: true },
     loop: { type: [Boolean, Number, String], default: false },
+    delay: { default: 0 },
     options: { default: void 0 }
   },
   emits: ["init", "finished"],
@@ -68,11 +69,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     const loopAnim = () => {
       loopCount++;
       startAnim(() => {
-        var _a;
         const isTruely = typeof props.loop === "boolean" && props.loop;
         if (isTruely || props.loop > loopCount) {
-          (_a = countUp.value) == null ? void 0 : _a.reset();
-          loopAnim();
+          delay(() => {
+            var _a;
+            (_a = countUp.value) == null ? void 0 : _a.reset();
+            loopAnim();
+          }, props.delay);
         } else {
           finished.value = true;
         }
@@ -97,6 +100,20 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
       init: initCountUp,
       restart
     });
+    function delay(cb, second = 1) {
+      let startTime;
+      function rAF(timestamp) {
+        if (!startTime)
+          startTime = timestamp;
+        const differ = timestamp - startTime;
+        if (differ < second * 1e3) {
+          requestAnimationFrame(rAF);
+        } else {
+          cb();
+        }
+      }
+      requestAnimationFrame(rAF);
+    }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
         renderSlot(_ctx.$slots, "prefix"),
