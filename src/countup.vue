@@ -15,12 +15,14 @@ const props = withDefaults(
     endVal: number | string
     // 开始数值
     startVal?: number | string
-    // 动画时长，单位秒
+    // 动画时长，单位 s
     duration?: number | string
     // 是否自动计数
     autoplay?: boolean
     // 循环次数，有限次数 / 无限循环
     loop?: boolean | number | string
+    // 延时，单位 s
+    delay?: number
     // countup 配置项
     options?: CountUpOptions
   }>(),
@@ -29,13 +31,14 @@ const props = withDefaults(
     duration: 2.5,
     autoplay: true,
     loop: false,
+    delay: 0,
     options: undefined
   }
 )
 const emits = defineEmits<{
-  // countup 初始化完成
+  // countup init complete
   (event: 'init', countup: CountUp): CountUp
-  // 计数完成
+  // count complete
   (event: 'finished'): void
 }>()
 
@@ -63,7 +66,7 @@ const startAnim = (cb?: () => void) => {
   countUp.value?.start(cb)
 }
 
-// endVal变化 & autoplay 为 true, 重新计数
+// endVal change & autoplay: true, restart animate
 watch(
   () => props.endVal,
   (value) => {
@@ -73,7 +76,7 @@ watch(
   }
 )
 
-// 循环动画
+// loop animation
 const finished = ref(false)
 let loopCount = 0
 const loopAnim = () => {
@@ -81,8 +84,10 @@ const loopAnim = () => {
   startAnim(() => {
     const isTruely = typeof props.loop === 'boolean' && props.loop
     if (isTruely || props.loop > loopCount) {
-      countUp.value?.reset()
-      loopAnim()
+      delay(() => {
+        countUp.value?.reset()
+        loopAnim()
+      }, props.delay)
     } else {
       finished.value = true
     }
@@ -110,6 +115,25 @@ defineExpose({
   init: initCountUp,
   restart
 })
+
+/**
+ * delay to execute callback function
+ * @param cb
+ * @param second
+ */
+function delay(cb: () => unknown, second = 1) {
+  let startTime: number
+  function rAF(timestamp: number) {
+    if (!startTime) startTime = timestamp
+    const differ = timestamp - startTime
+    if (differ < second * 1000) {
+      requestAnimationFrame(rAF)
+    } else {
+      cb()
+    }
+  }
+  requestAnimationFrame(rAF)
+}
 </script>
 
 <template>
