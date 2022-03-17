@@ -17,7 +17,7 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-import { defineComponent, ref, watch, onMounted, openBlock, createElementBlock, renderSlot, createElementVNode } from "vue";
+import { defineComponent, ref, watch, onMounted, onUnmounted, openBlock, createElementBlock, renderSlot, createElementVNode } from "vue";
 import { CountUp } from "countup.js";
 const _hoisted_1 = { class: "countup-wrap" };
 const __default__ = {
@@ -92,6 +92,26 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
         loopAnim();
       }
     });
+    onUnmounted(() => {
+      var _a;
+      cancelAnimationFrame(dalayRafId);
+      (_a = countUp.value) == null ? void 0 : _a.reset();
+    });
+    let dalayRafId;
+    const delay = (cb, seconds = 1) => {
+      let startTime;
+      function count(timestamp) {
+        if (!startTime)
+          startTime = timestamp;
+        const diff = timestamp - startTime;
+        if (diff < seconds * 1e3) {
+          dalayRafId = requestAnimationFrame(count);
+        } else {
+          cb();
+        }
+      }
+      dalayRafId = requestAnimationFrame(count);
+    };
     const restart = () => {
       initCountUp();
       startAnim();
@@ -100,20 +120,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
       init: initCountUp,
       restart
     });
-    function delay(cb, second = 1) {
-      let startTime;
-      function rAF(timestamp) {
-        if (!startTime)
-          startTime = timestamp;
-        const differ = timestamp - startTime;
-        if (differ < second * 1e3) {
-          requestAnimationFrame(rAF);
-        } else {
-          cb();
-        }
-      }
-      requestAnimationFrame(rAF);
-    }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
         renderSlot(_ctx.$slots, "prefix"),
