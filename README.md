@@ -17,6 +17,31 @@ yarn
 yarn add vue-countup-v3
 ```
 
+<details>
+<summary><strong>cdn</strong></summary>
+cdn 方式引入，暴露的全局变量为 VueCountUp
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="app">
+       <count-up :end-val="2000"></count-up>
+    </div>
+
+    <script src="https://unpkg.com/vue@latest"></script>
+    <script src="https://unpkg.com/vue-countup-v3@latest/dist/vue-countup-v3.iife.js"></script>
+    <script>
+        const app = Vue.createApp({})
+        app.component('CountUp', VueCountUp)
+        app.mount('#app')
+    </script>
+  </body>
+</html>
+```
+
+</details>
+
 ## Usage
 
 **简单示例（simple usage）**
