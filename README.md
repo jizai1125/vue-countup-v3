@@ -8,13 +8,13 @@
 npm
 
 ```bash
-npm i countup.js vue-countup-v3
+npm i vue-countup-v3
 ```
 
 yarn
 
 ```bash
-yarn add countup.js vue-countup-v3
+yarn add vue-countup-v3
 ```
 
 ## Usage

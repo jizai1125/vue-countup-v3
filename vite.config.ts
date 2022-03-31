@@ -20,11 +20,14 @@ export default defineConfig({
       fileName: (format) => `${pkg.name}.${format}.js`
     },
     rollupOptions: {
-      external: ['vue', 'countup.js'],
+      external: [
+        'vue'
+        // 'countup.js'
+      ],
       output: {
         globals: {
-          vue: 'Vue',
-          'countup.js': 'countUp'
+          vue: 'Vue'
+          // 'countup.js': 'countUp'
         }
       }
     }

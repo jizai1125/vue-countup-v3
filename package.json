@@ -1,6 +1,6 @@
 {
   "name": "vue-countup-v3",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Vue 3 component wrap for countUp.js，and expand some features！",
   "keywords": [
     "vue3",
@@ -40,17 +40,17 @@
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "prepare": "husky install"
   },
-  "dependencies": {},
+  "dependencies": {
+    "countup.js": "^2.1.0"
+  },
   "peerDependencies": {
-    "countup.js": "^2",
-    "vue": "^3"
+    "vue": "latest"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "@vitejs/plugin-vue": "^2.2.0",
-    "countup.js": "^2.1.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
