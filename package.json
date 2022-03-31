@@ -25,7 +25,7 @@
     "type": "git",
     "url": "https://github.com/jizai1125/vue-countup-v3"
   },
-  "homepage": "https://jizai1125.github.io/vue-countup-v3/demo",
+  "homepage": "https://github.com/jizai1125/vue-countup-v3/#readme",
   "files": [
     "dist/*",
     "src/**/*.vue"
