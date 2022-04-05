@@ -1,6 +1,6 @@
 # vue-countup-v3 [![npm](https://img.shields.io/npm/v/vue-countup-v3?color=green)](https://www.npmjs.com/package/vue-countup-v3) ![](https://img.shields.io/bundlephobia/min/vue-countup-v3)
 
-> Vue 3 component wrap for _countUp.js_ , and expand some features
+> Vue 3 component for animation counting，counting up or down, etc. wrap for _countUp.js_  and expand some features
 ## [Try the demo](https://jizai1125.github.io/vue-countup-v3/examples/)
 
 ## Installation
@@ -147,6 +147,15 @@ import CountUp from 'vue-countup-v3'
 | :-------: | :------------------------: | :----------: |
 |   @init   | CountUp 实例初始化完成触发 | CountUp 实例 |
 | @finished |       计数结束时触发       |      -       |
+
+### 类型定义 （Type Definition）
+
+```ts
+import type {
+    ICountUp,
+    CountUpOptions
+} from 'vue-countup-v3'
+```
 
 
 
