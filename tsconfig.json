@@ -12,7 +12,5 @@
     "lib": ["esnext", "dom"]
   },
   "include": ["src/*", "types/*", "env.d.ts"],
-   "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
