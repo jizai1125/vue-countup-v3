@@ -32,8 +32,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "release": "node scripts/release.js",
     "dev": "vite",
+    "release": "node scripts/release.js",
     "build": "vite build && npm run build:dts",
     "build:dts": "vue-tsc --declaration --emitDeclarationOnly --declarationDir dist",
     "preinstall": "node ./scripts/checkYarn.js",
