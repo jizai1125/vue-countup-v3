@@ -76,7 +76,7 @@ async function main() {
   updatePkgVersion(targetVersion)
 
   step('\n3. 运行打包命令')
-  runIfNotDry('yarn', ['build'])
+  await runIfNotDry('yarn', ['build'])
 
   // 4. TODO step('\n生成changelog')
 
