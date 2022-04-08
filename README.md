@@ -1,6 +1,9 @@
 # vue-countup-v3 [![npm](https://img.shields.io/npm/v/vue-countup-v3?color=green)](https://www.npmjs.com/package/vue-countup-v3) ![](https://img.shields.io/bundlephobia/min/vue-countup-v3)
 
-> Vue 3 component for animation counting，counting up or down, etc. wrap for _countUp.js_  and expand some features
+> Vue 3 component for animation counting，counting up or down, etc. wrap for _countUp.js_  and expand some features.
+
+![gif](https://mmbiz.qpic.cn/mmbiz_gif/JcXdtHmqHHbyUYWCecZxvolAQpuFKciaH34IByF9v9Rv65v8OAZIuOCdCawm4e3xibDjQ1x4RgrfXYLDhuOKEerw/640?wx_fmt=gif&wxfrom=5&wx_lazy=1)
+
 ## [Try the demo](https://jizai1125.github.io/vue-countup-v3/examples/)
 
 ## Installation
