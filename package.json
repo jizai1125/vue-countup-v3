@@ -39,6 +39,7 @@
     "preinstall": "node ./scripts/checkYarn.js",
     "check:type": "vue-tsc --noEmit",
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -48,11 +49,14 @@
     "vue": "latest"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "@vitejs/plugin-vue": "^2.2.0",
     "chalk": "^4.1.2",
+    "conventional-changelog-cli": "^2.2.2",
     "enquirer": "^2.3.6",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.5.0",
