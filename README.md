@@ -1,6 +1,6 @@
 # vue-countup-v3 [![npm](https://img.shields.io/npm/v/vue-countup-v3?color=green)](https://www.npmjs.com/package/vue-countup-v3) ![](https://img.shields.io/bundlephobia/min/vue-countup-v3)
 
-> Vue 3 component for animation counting，counting up or down, etc. wrap for _countUp.js_  and expand some features.
+> 基于 countup.js 封装的 vue3 计数动画组件，并扩展一些功能。( Vue 3 component for animation counting，counting up or down, etc. wrap for countUp.js  and expand some features. )
 
 ![gif](https://mmbiz.qpic.cn/mmbiz_gif/JcXdtHmqHHbyUYWCecZxvolAQpuFKciaH34IByF9v9Rv65v8OAZIuOCdCawm4e3xibDjQ1x4RgrfXYLDhuOKEerw/640?wx_fmt=gif&wxfrom=5&wx_lazy=1)
 
@@ -151,7 +151,7 @@ import CountUp from 'vue-countup-v3'
 |   @init   | CountUp 实例初始化完成触发 | CountUp 实例 |
 | @finished |       计数结束时触发       |      -       |
 
-### 类型定义 （Type Definition）
+## 类型定义 （Type Definition）
 
 ```ts
 import type {
