@@ -1,6 +1,6 @@
 {
   "name": "vue-countup-v3",
-  "version": "1.0.8-beta.0",
+  "version": "1.0.7",
   "description": "Vue 3 component wrap for countUp.js，and expand some features！",
   "keywords": [
     "vue3",
@@ -36,7 +36,6 @@
     "release": "node scripts/release.js",
     "build": "vite build && npm run build:dts",
     "build:dts": "vue-tsc --declaration --emitDeclarationOnly --declarationDir dist",
-    "preinstall": "node ./scripts/checkYarn.js",
     "check:type": "vue-tsc --noEmit",
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",

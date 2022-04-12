@@ -78,7 +78,8 @@ async function main() {
   step('\n3. 运行打包命令')
   await runIfNotDry('yarn', ['build'])
 
-  // 4. TODO step('\n生成changelog')
+  step('\n4. 生成changelog')
+  await runIfNotDry('yarn', ['run', 'changelog'])
 
   step('\n5. git 提交代码')
   const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
@@ -120,30 +121,22 @@ async function publishPackage(version) {
   } else if (version.includes('rc')) {
     releaseTag = 'rc'
   }
-  try {
-    const pkgRoot = path.resolve(__dirname, '../')
-    await runIfNotDry(
-      'yarn',
-      [
-        'publish',
-        '--new-version',
-        version,
-        ...(releaseTag ? ['--tag', releaseTag] : []),
-        '--access',
-        'public'
-      ],
-      {
-        cwd: pkgRoot,
-        stdio: 'pipe'
-      }
-    )
-  } catch (e) {
-    if (e.stderr.match(/previously published/)) {
-      console.log(chalk.red(`之前已发布过该版本：${targetVersion}`))
-    } else {
-      throw e
+  const pkgRoot = path.resolve(__dirname, '../')
+  await runIfNotDry(
+    'yarn',
+    [
+      'publish',
+      '--new-version',
+      version,
+      ...(releaseTag ? ['--tag', releaseTag] : []),
+      '--access',
+      'public'
+    ],
+    {
+      cwd: pkgRoot,
+      stdio: 'pipe'
     }
-  }
+  )
 }
 
 main().catch((err) => {
