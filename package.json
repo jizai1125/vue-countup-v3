@@ -27,8 +27,7 @@
   },
   "homepage": "https://github.com/jizai1125/vue-countup-v3/#readme",
   "files": [
-    "dist/*",
-    "src/**/*.vue"
+    "dist/*"
   ],
   "license": "MIT",
   "scripts": {
