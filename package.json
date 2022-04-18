@@ -45,7 +45,7 @@
     "countup.js": "^2.1.0"
   },
   "peerDependencies": {
-    "vue": "latest"
+    "vue": "^3.2.31"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
