@@ -37,7 +37,7 @@ const props = withDefaults(
 )
 const emits = defineEmits<{
   // countup init complete
-  (event: 'init', countup: CountUp): CountUp
+  (event: 'init', countup: CountUp): void
   // count complete
   (event: 'finished'): void
 }>()
