@@ -1,6 +1,6 @@
 {
   "name": "vue-countup-v3",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Vue 3 component wrap for countUp.js，and expand some features！",
   "keywords": [
     "vue3",
@@ -27,8 +27,7 @@
   },
   "homepage": "https://github.com/jizai1125/vue-countup-v3/#readme",
   "files": [
-    "dist/*",
-    "src/**/*.vue"
+    "dist/*"
   ],
   "license": "MIT",
   "scripts": {
@@ -45,7 +44,7 @@
     "countup.js": "^2.1.0"
   },
   "peerDependencies": {
-    "vue": "latest"
+    "vue": "^3.2.31"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
