@@ -16,7 +16,7 @@ export default defineConfig({
     lib: {
       entry: resolvePath('src/countup.vue'),
       name: 'VueCountUp',
-      formats: ['es', 'iife'],
+      formats: ['es', 'umd', 'iife'],
       fileName: (format) => `${pkg.name}.${format}.js`
     },
     rollupOptions: {
