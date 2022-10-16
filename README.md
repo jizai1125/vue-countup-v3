@@ -182,7 +182,7 @@ interface CountUpOptions {
   useEasing?: boolean // ease animation (true) 是否开启动画过渡，默认动画函数为easeOutExpo 
   smartEasingThreshold?: number // smooth easing for large numbers above this if useEasing (999)
   smartEasingAmount?: number // amount to be eased for numbers above threshold (333)
-  separator?: string // grouping separator (',') 千位分隔符
+  separator?: string // grouping separator (',') 千分位分隔符
   decimal?: string // decimal ('.') 小数点分隔符
   // easingFn: easing function for animation (easeOutExpo) 动画函数
   easingFn?: (t: number, b: number, c: number, d: number) => number
