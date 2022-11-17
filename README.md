@@ -62,7 +62,7 @@ import CountUp from 'vue-countup-v3'
 
 <details>
 <summary><strong>插槽示例（slot usage）</strong></summary>
-当 prefix 或者 suffix 需要与数值样式区分开时，可使用插槽的方式取代 options 配置。
+当 prefix / suffix 需要与数值样式区分开时，可使用插槽的方式取代 options 中的 prefix / suffix 配置。
 
 ```html
 <script setup lang="ts">
@@ -88,27 +88,32 @@ import CountUp from 'vue-countup-v3'
 
 ```html
 <script setup lang="ts">
+  import { ref } from 'vue'
   import CountUp from 'vue-countup-v3'
   import type { ICountUp, CountUpOptions } from 'vue-countup-v3'
+  
+  const endValueRef = ref(2022.22)
   // coutup.js options
   const options: CountUpOptions = {
-    decimalPlaces: 2
+    separator: '❤️'
     // ...
   }
-  let countUp: ICountUp
+  let countUp: ICountUp | undefined
   const onInit = (ctx: ICountUp) => {
     console.log('init', ctx)
     countUp = ctx
   }
   const onFinished = () => {
     console.log('finished')
+    countUp?.reset()
   }
 </script>
 
 <template>
   <count-up 
-    :end-val="2000"
+    :end-val="endValueRef"
     :duration="2.5"
+    :decimal-places="2"
     :options="options"
     :loop="2"
     :delay="2"
@@ -123,34 +128,35 @@ import CountUp from 'vue-countup-v3'
 
 以下属性同 coutup.js 配置项（same as countup.js properties）
 
-|   Name   |       Type       | Default |                             Description                              |
-| :------: | :--------------: | :-----: | :------------------------------------------------------------------: |
-|  endVal  | Number \| String |    -    |                                结束值                                |
-| startVal | Number \| String |    0    |                                起始值                                |
-| duration |      Number      |   2.5   |                          动画时长，单位：秒                          |
-| options  |      Object      |    -    | [countUp.js](https://github.com/inorganik/countUp.js) options 配置项 |
+|   Name   |       Type       | Default |                             Description                              | Version |
+| :------- | :--------------- | :------ | :------------------------------------------------------------------- | :------- |
+|  endVal  | Number \| String |    -    |                                结束值                                |  |
+| startVal | Number \| String |    0    |                                起始值                                |  |
+| duration |      Number      |   2.5   |                          动画时长，单位：秒                          |  |
+| decimalPlaces |      Number      |   0   |                          小数点位数                          | 1.1.0 |
+| options  |      Object      |    -    | [countUp.js](https://github.com/inorganik/countUp.js) options 配置项 |  |
 
 以下为组件特有属性（extension properties）
 
-|   Name   |       Type        | Default |          Description          |
-| :------: | :---------------: | :-----: | :---------------------------: |
-| autoplay |      Boolean      |  true   |         是否自动计数          |
-|   loop   | Boolean \| Number |  false  | 循环次数，有限次数 / 无限循环 |
-|  delay   |      Number       |    0    | loop 循环的间隔时间，单位：秒 |
+| Name     | Type              | Default | Description                   |
+| :------- | :---------------- | :------ | :---------------------------- |
+| autoplay | Boolean           | true    | 是否自动计数                  |
+| loop     | Boolean \| Number | false   | 循环次数，有限次数 / 无限循环 |
+| delay    | Number            | 0       | loop 循环的间隔时间，单位：秒 |
 
 ## 插槽（slots）
 
-|  Name  | Description |
-| :----: | :---------: |
-| prefix |    前缀     |
-| suffix |    后缀     |
+| Name   | Description |
+| :----- | :---------- |
+| prefix | 前缀        |
+| suffix | 后缀        |
 
 ## 事件（Events）
 
-|   Name    |        Description         |    return    |
-| :-------: | :------------------------: | :----------: |
-|   @init   | CountUp 实例初始化完成触发 | CountUp 实例 |
-| @finished |       计数结束时触发       |      -       |
+| Name      | Description                | return       |
+| :-------- | :------------------------- | :----------- |
+| @init     | CountUp 实例初始化完成触发 | CountUp 实例 |
+| @finished | 计数结束时触发             | -            |
 
 ## 类型定义 （Type Definition）
 

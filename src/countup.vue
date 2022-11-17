@@ -17,6 +17,8 @@ const props = withDefaults(
     startVal?: number | string
     // 动画时长，单位 s
     duration?: number | string
+    // 小数点位数
+    decimalPlaces?: number
     // 是否自动计数
     autoplay?: boolean
     // 循环次数，有限次数 / 无限循环
@@ -29,6 +31,7 @@ const props = withDefaults(
   {
     startVal: 0,
     duration: 2.5,
+    decimalPlaces: 0,
     autoplay: true,
     loop: false,
     delay: 0,
@@ -53,6 +56,7 @@ const initCountUp = () => {
   countUp.value = new CountUp(elRef.value, endVal, {
     startVal,
     duration,
+    decimalPlaces: props.decimalPlaces,
     ...props.options
   })
   if (countUp.value.error) {
