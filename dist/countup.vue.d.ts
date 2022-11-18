@@ -16,6 +16,11 @@ declare const _default: import("vue").DefineComponent<{
     } & {
         default: number;
     };
+    decimalPlaces: {
+        type: import("vue").PropType<number>;
+    } & {
+        default: number;
+    };
     autoplay: {
         type: import("vue").PropType<boolean>;
     } & {
@@ -55,6 +60,11 @@ declare const _default: import("vue").DefineComponent<{
     } & {
         default: number;
     };
+    decimalPlaces: {
+        type: import("vue").PropType<number>;
+    } & {
+        default: number;
+    };
     autoplay: {
         type: import("vue").PropType<boolean>;
     } & {
@@ -84,6 +94,7 @@ declare const _default: import("vue").DefineComponent<{
     autoplay: boolean;
     loop: string | number | boolean;
     startVal: string | number;
+    decimalPlaces: number;
     delay: number;
 }>;
 export default _default;

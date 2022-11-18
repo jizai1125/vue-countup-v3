@@ -104,6 +104,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     endVal: null,
     startVal: { default: 0 },
     duration: { default: 2.5 },
+    decimalPlaces: { default: 0 },
     autoplay: { type: Boolean, default: true },
     loop: { type: [Boolean, Number, String], default: false },
     delay: { default: 0 },
@@ -122,7 +123,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
       const duration = Number(props.duration);
       countUp.value = new CountUp(elRef.value, endVal, __spreadValues({
         startVal,
-        duration
+        duration,
+        decimalPlaces: props.decimalPlaces
       }, props.options));
       if (countUp.value.error) {
         console.error(countUp.value.error);

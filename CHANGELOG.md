@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/jizai1125/vue-countup-v3/compare/v1.0.14...v1.1.0) (2022-11-18)
+
+
+### Features
+
+* add prop  `decimalPlaces` ([b1f3e35](https://github.com/jizai1125/vue-countup-v3/commit/b1f3e35c385432ec9f8de188207c6f91f85a7548))
+
+
+
 ## [1.0.14](https://github.com/jizai1125/vue-countup-v3/compare/v1.0.14-beta.0...v1.0.14) (2022-07-31)
 
 
