@@ -1,7 +1,6 @@
 # vue-countup-v3 [![npm](https://img.shields.io/npm/v/vue-countup-v3?color=green)](https://www.npmjs.com/package/vue-countup-v3) ![](https://img.shields.io/bundlephobia/min/vue-countup-v3)
-
-> 基于 countup.js 封装的 vue3 计数动画组件，并扩展一些功能。    
-> Vue 3 component for animation counting， wrap for countUp.js  and expand some features. 
+    
+> A Vue 3 component for animation counting, wrap for countUp.js  and expand some features.
 
 ![gif](https://img-blog.csdnimg.cn/b1920b2bf11349bba5cf03fbe1f5e1cf.gif#pic_center)
 
@@ -13,12 +12,6 @@ npm
 
 ```bash
 npm i vue-countup-v3
-```
-
-yarn
-
-```bash
-yarn add vue-countup-v3
 ```
 
 <details>
@@ -126,23 +119,16 @@ import CountUp from 'vue-countup-v3'
 
 ## 属性（Properties）
 
-以下属性同 coutup.js 配置项（same as countup.js properties）
-
 |   Name   |       Type       | Default |                             Description                              | Version |
 | :------- | :--------------- | :------ | :------------------------------------------------------------------- | :------- |
 |  endVal  | Number \| String |    -    |                                结束值                                |  |
 | startVal | Number \| String |    0    |                                起始值                                |  |
 | duration |      Number      |   2.5   |                          动画时长，单位：秒                          |  |
 | decimalPlaces |      Number      |   0   |                          小数点位数                          | 1.1.0 |
-| options  |      Object      |    -    | [countUp.js](https://github.com/inorganik/countUp.js) options 配置项 |  |
-
-以下为组件特有属性（extension properties）
-
-| Name     | Type              | Default | Description                   |
-| :------- | :---------------- | :------ | :---------------------------- |
-| autoplay | Boolean           | true    | 是否自动计数                  |
-| loop     | Boolean \| Number | false   | 循环次数，有限次数 / 无限循环 |
-| delay    | Number            | 0       | loop 循环的间隔时间，单位：秒 |
+| autoplay | Boolean           | true    | 是否自动计数                  |  |
+| loop     | Boolean \| Number | false   | 循环次数，有限次数 / 无限循环 |  |
+| delay    | Number            | 0       | loop 循环的间隔时间，单位：秒 |  |
+| options  |      Object      |    -    | [countUp.js Options](https://github.com/inorganik/countUp.js#usage) 配置项 |  |
 
 ## 插槽（slots）
 
