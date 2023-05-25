@@ -22,7 +22,7 @@ const props = withDefaults(
     // 是否自动计数
     autoplay?: boolean
     // 循环次数，有限次数 / 无限循环
-    loop?: boolean | number | string
+    loop?: boolean | number
     // 延时，单位 s
     delay?: number
     // countup 配置项
@@ -87,7 +87,7 @@ const loopAnim = () => {
   loopCount++
   startAnim(() => {
     const isTruely = typeof props.loop === 'boolean' && props.loop
-    if (isTruely || props.loop > loopCount) {
+    if (isTruely || (props.loop as number) > loopCount) {
       delay(() => {
         countUp.value?.reset()
         loopAnim()
