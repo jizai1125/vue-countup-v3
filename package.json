@@ -42,7 +42,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "countup.js": "^2.1.0"
+    "countup.js": "^2.6.2"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
