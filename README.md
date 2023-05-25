@@ -1,6 +1,6 @@
 # vue-countup-v3 [![npm](https://img.shields.io/npm/v/vue-countup-v3?color=green)](https://www.npmjs.com/package/vue-countup-v3) ![](https://img.shields.io/bundlephobia/min/vue-countup-v3)
     
-> A Vue 3 component for animation counting, wrap for countUp.js  and expand some features.
+> A Vue 3 component for animation counting, wrap for countUp.js(v2.6.2)  and expand some features.
 
 ![gif](https://img-blog.csdnimg.cn/b1920b2bf11349bba5cf03fbe1f5e1cf.gif#pic_center)
 
@@ -98,7 +98,6 @@ import CountUp from 'vue-countup-v3'
   }
   const onFinished = () => {
     console.log('finished')
-    countUp?.reset()
   }
 </script>
 
@@ -128,7 +127,7 @@ import CountUp from 'vue-countup-v3'
 | autoplay | Boolean           | true    | 是否自动计数                  |  |
 | loop     | Boolean \| Number | false   | 循环次数，有限次数 / 无限循环 |  |
 | delay    | Number            | 0       | loop 循环的间隔时间，单位：秒 |  |
-| options  |      Object      |    -    | [countUp.js Options](https://github.com/inorganik/countUp.js#usage) 配置项 |  |
+| options  |      Object      |    -    | [countUp.js Options](https://github.com/inorganik/countUp.js#usage) |  |
 
 ## 插槽（slots）
 
@@ -161,9 +160,7 @@ import type {
 
 ## coutup.js 说明
 
-see more [countUp.js](https://github.com/inorganik/countUp.js)
-
-### 配置项（**Options** ）
+### 配置项（**Options**）
 
 ```typescript
 interface CountUpOptions {
@@ -171,7 +168,8 @@ interface CountUpOptions {
   decimalPlaces?: number // number of decimal places (0) 小数点 位数
   duration?: number // animation duration in seconds (2) 动画时长
   useGrouping?: boolean // example: 1,000 vs 1000 (true) 是否使用千分位
-  useEasing?: boolean // ease animation (true) 是否开启动画过渡，默认动画函数为easeOutExpo 
+  useIndianSeparators?: boolean; // example: 1,00,000 vs 100,000 (false)
+  useEasing?: boolean // ease animation (true) 是否开启动画过渡，默认动画函数为 easeOutExpo 
   smartEasingThreshold?: number // smooth easing for large numbers above this if useEasing (999)
   smartEasingAmount?: number // amount to be eased for numbers above threshold (333)
   separator?: string // grouping separator (',') 千分位分隔符
@@ -184,30 +182,33 @@ interface CountUpOptions {
   numerals?: string[] // numeral glyph substitution 数字符号替换 0 - 9，例如替换为 [a,b,c,d,e,f,g,h,i,j]
   enableScrollSpy?: boolean // start animation when target is in view 在可视范围内才开始动画
   scrollSpyDelay?: number // delay (ms) after target comes into view  目标进入可视范围内后的延迟时间(毫秒)
+  scrollSpyOnce?: boolean; // run only once
+  onCompleteCallback?: () => any; // gets called when animation completes
+  plugin?: CountUpPlugin; // for alternate animations
 }
 ```
-
+see more [countUp.js](https://github.com/inorganik/countUp.js)
 ### **方法（Methods）**
 
-开始计数
+开始计数（Start animation）
 
 ```js
 countUp.start()
 ```
 
-Toggle pause/resume 切换暂停/恢复
+切换暂停/恢复（Toggle pause/resume）
 
 ```js
 countUp.pauseResume()
 ```
 
-Reset the animation: 重置数值
+重置数值（Reset the animation）
 
 ```js
 countUp.reset()
 ```
 
-Update the end value and animate: 修改结束值且继续动画
+修改结束值且继续动画（Update the end value and animate）
 
 ```js
 countUp.update(1000)
