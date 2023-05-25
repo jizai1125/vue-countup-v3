@@ -1,3 +1,7 @@
+# [1.2.0](https://github.com/jizai1125/vue-countup-v3/compare/v1.1.0...v1.2.0) (2023-05-25)
+
+
+
 # [1.1.0](https://github.com/jizai1125/vue-countup-v3/compare/v1.0.14...v1.1.0) (2022-11-18)
 
 

@@ -18,82 +18,92 @@ var __spreadValues = (a, b) => {
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 import { defineComponent, ref, watch, onMounted, onUnmounted, openBlock, createElementBlock, renderSlot, createElementVNode } from "vue";
-var __assign = globalThis && globalThis.__assign || function() {
-  return (__assign = Object.assign || function(t) {
-    for (var i, a = 1, n = arguments.length; a < n; a++)
-      for (var s in i = arguments[a])
-        Object.prototype.hasOwnProperty.call(i, s) && (t[s] = i[s]);
-    return t;
-  }).apply(this, arguments);
-}, CountUp = function() {
-  function t(t2, i, a) {
-    var n = this;
-    this.endVal = i, this.options = a, this.version = "2.1.0", this.defaults = { startVal: 0, decimalPlaces: 0, duration: 2, useEasing: true, useGrouping: true, smartEasingThreshold: 999, smartEasingAmount: 333, separator: ",", decimal: ".", prefix: "", suffix: "", enableScrollSpy: false, scrollSpyDelay: 200 }, this.finalEndVal = null, this.useEasing = true, this.countDown = false, this.error = "", this.startVal = 0, this.paused = true, this.count = function(t3) {
-      n.startTime || (n.startTime = t3);
-      var i2 = t3 - n.startTime;
-      n.remaining = n.duration - i2, n.useEasing ? n.countDown ? n.frameVal = n.startVal - n.easingFn(i2, 0, n.startVal - n.endVal, n.duration) : n.frameVal = n.easingFn(i2, n.startVal, n.endVal - n.startVal, n.duration) : n.countDown ? n.frameVal = n.startVal - (n.startVal - n.endVal) * (i2 / n.duration) : n.frameVal = n.startVal + (n.endVal - n.startVal) * (i2 / n.duration), n.countDown ? n.frameVal = n.frameVal < n.endVal ? n.endVal : n.frameVal : n.frameVal = n.frameVal > n.endVal ? n.endVal : n.frameVal, n.frameVal = Number(n.frameVal.toFixed(n.options.decimalPlaces)), n.printValue(n.frameVal), i2 < n.duration ? n.rAF = requestAnimationFrame(n.count) : n.finalEndVal !== null ? n.update(n.finalEndVal) : n.callback && n.callback();
-    }, this.formatNumber = function(t3) {
-      var i2, a2, s, e, r = t3 < 0 ? "-" : "";
-      i2 = Math.abs(t3).toFixed(n.options.decimalPlaces);
-      var o = (i2 += "").split(".");
-      if (a2 = o[0], s = o.length > 1 ? n.options.decimal + o[1] : "", n.options.useGrouping) {
+var t = function() {
+  return t = Object.assign || function(t2) {
+    for (var i2, n = 1, s = arguments.length; n < s; n++)
+      for (var a in i2 = arguments[n])
+        Object.prototype.hasOwnProperty.call(i2, a) && (t2[a] = i2[a]);
+    return t2;
+  }, t.apply(this, arguments);
+}, i = function() {
+  function i2(i3, n, s) {
+    var a = this;
+    this.endVal = n, this.options = s, this.version = "2.6.2", this.defaults = { startVal: 0, decimalPlaces: 0, duration: 2, useEasing: true, useGrouping: true, useIndianSeparators: false, smartEasingThreshold: 999, smartEasingAmount: 333, separator: ",", decimal: ".", prefix: "", suffix: "", enableScrollSpy: false, scrollSpyDelay: 200, scrollSpyOnce: false }, this.finalEndVal = null, this.useEasing = true, this.countDown = false, this.error = "", this.startVal = 0, this.paused = true, this.once = false, this.count = function(t2) {
+      a.startTime || (a.startTime = t2);
+      var i4 = t2 - a.startTime;
+      a.remaining = a.duration - i4, a.useEasing ? a.countDown ? a.frameVal = a.startVal - a.easingFn(i4, 0, a.startVal - a.endVal, a.duration) : a.frameVal = a.easingFn(i4, a.startVal, a.endVal - a.startVal, a.duration) : a.frameVal = a.startVal + (a.endVal - a.startVal) * (i4 / a.duration);
+      var n2 = a.countDown ? a.frameVal < a.endVal : a.frameVal > a.endVal;
+      a.frameVal = n2 ? a.endVal : a.frameVal, a.frameVal = Number(a.frameVal.toFixed(a.options.decimalPlaces)), a.printValue(a.frameVal), i4 < a.duration ? a.rAF = requestAnimationFrame(a.count) : a.finalEndVal !== null ? a.update(a.finalEndVal) : a.options.onCompleteCallback && a.options.onCompleteCallback();
+    }, this.formatNumber = function(t2) {
+      var i4, n2, s2, e, o = t2 < 0 ? "-" : "";
+      i4 = Math.abs(t2).toFixed(a.options.decimalPlaces);
+      var r = (i4 += "").split(".");
+      if (n2 = r[0], s2 = r.length > 1 ? a.options.decimal + r[1] : "", a.options.useGrouping) {
         e = "";
-        for (var l = 0, h = a2.length; l < h; ++l)
-          l !== 0 && l % 3 == 0 && (e = n.options.separator + e), e = a2[h - l - 1] + e;
-        a2 = e;
+        for (var l = 3, h = 0, u = 0, p = n2.length; u < p; ++u)
+          a.options.useIndianSeparators && u === 4 && (l = 2, h = 1), u !== 0 && h % l == 0 && (e = a.options.separator + e), h++, e = n2[p - u - 1] + e;
+        n2 = e;
       }
-      return n.options.numerals && n.options.numerals.length && (a2 = a2.replace(/[0-9]/g, function(t4) {
-        return n.options.numerals[+t4];
-      }), s = s.replace(/[0-9]/g, function(t4) {
-        return n.options.numerals[+t4];
-      })), r + n.options.prefix + a2 + s + n.options.suffix;
-    }, this.easeOutExpo = function(t3, i2, a2, n2) {
-      return a2 * (1 - Math.pow(2, -10 * t3 / n2)) * 1024 / 1023 + i2;
-    }, this.options = __assign(__assign({}, this.defaults), a), this.formattingFn = this.options.formattingFn ? this.options.formattingFn : this.formatNumber, this.easingFn = this.options.easingFn ? this.options.easingFn : this.easeOutExpo, this.startVal = this.validateValue(this.options.startVal), this.frameVal = this.startVal, this.endVal = this.validateValue(i), this.options.decimalPlaces = Math.max(this.options.decimalPlaces), this.resetDuration(), this.options.separator = String(this.options.separator), this.useEasing = this.options.useEasing, this.options.separator === "" && (this.options.useGrouping = false), this.el = typeof t2 == "string" ? document.getElementById(t2) : t2, this.el ? this.printValue(this.startVal) : this.error = "[CountUp] target is null or undefined", window !== void 0 && this.options.enableScrollSpy && (this.error ? console.error(this.error, t2) : (window.onScrollFns = window.onScrollFns || [], window.onScrollFns.push(function() {
-      return n.handleScroll(n);
+      return a.options.numerals && a.options.numerals.length && (n2 = n2.replace(/[0-9]/g, function(t3) {
+        return a.options.numerals[+t3];
+      }), s2 = s2.replace(/[0-9]/g, function(t3) {
+        return a.options.numerals[+t3];
+      })), o + a.options.prefix + n2 + s2 + a.options.suffix;
+    }, this.easeOutExpo = function(t2, i4, n2, s2) {
+      return n2 * (1 - Math.pow(2, -10 * t2 / s2)) * 1024 / 1023 + i4;
+    }, this.options = t(t({}, this.defaults), s), this.formattingFn = this.options.formattingFn ? this.options.formattingFn : this.formatNumber, this.easingFn = this.options.easingFn ? this.options.easingFn : this.easeOutExpo, this.startVal = this.validateValue(this.options.startVal), this.frameVal = this.startVal, this.endVal = this.validateValue(n), this.options.decimalPlaces = Math.max(this.options.decimalPlaces), this.resetDuration(), this.options.separator = String(this.options.separator), this.useEasing = this.options.useEasing, this.options.separator === "" && (this.options.useGrouping = false), this.el = typeof i3 == "string" ? document.getElementById(i3) : i3, this.el ? this.printValue(this.startVal) : this.error = "[CountUp] target is null or undefined", typeof window != "undefined" && this.options.enableScrollSpy && (this.error ? console.error(this.error, i3) : (window.onScrollFns = window.onScrollFns || [], window.onScrollFns.push(function() {
+      return a.handleScroll(a);
     }), window.onscroll = function() {
-      window.onScrollFns.forEach(function(t3) {
-        return t3();
+      window.onScrollFns.forEach(function(t2) {
+        return t2();
       });
     }, this.handleScroll(this)));
   }
-  return t.prototype.handleScroll = function(t2) {
-    if (t2 && window) {
-      var i = window.innerHeight + window.scrollY, a = t2.el.offsetTop + t2.el.offsetHeight;
-      a < i && a > window.scrollY && t2.paused ? (t2.paused = false, setTimeout(function() {
+  return i2.prototype.handleScroll = function(t2) {
+    if (t2 && window && !t2.once) {
+      var i3 = window.innerHeight + window.scrollY, n = t2.el.getBoundingClientRect(), s = n.top + window.pageYOffset, a = n.top + n.height + window.pageYOffset;
+      a < i3 && a > window.scrollY && t2.paused ? (t2.paused = false, setTimeout(function() {
         return t2.start();
-      }, t2.options.scrollSpyDelay)) : window.scrollY > a && !t2.paused && t2.reset();
+      }, t2.options.scrollSpyDelay), t2.options.scrollSpyOnce && (t2.once = true)) : (window.scrollY > a || s > i3) && !t2.paused && t2.reset();
     }
-  }, t.prototype.determineDirectionAndSmartEasing = function() {
+  }, i2.prototype.determineDirectionAndSmartEasing = function() {
     var t2 = this.finalEndVal ? this.finalEndVal : this.endVal;
     this.countDown = this.startVal > t2;
-    var i = t2 - this.startVal;
-    if (Math.abs(i) > this.options.smartEasingThreshold) {
+    var i3 = t2 - this.startVal;
+    if (Math.abs(i3) > this.options.smartEasingThreshold && this.options.useEasing) {
       this.finalEndVal = t2;
-      var a = this.countDown ? 1 : -1;
-      this.endVal = t2 + a * this.options.smartEasingAmount, this.duration = this.duration / 2;
+      var n = this.countDown ? 1 : -1;
+      this.endVal = t2 + n * this.options.smartEasingAmount, this.duration = this.duration / 2;
     } else
       this.endVal = t2, this.finalEndVal = null;
-    this.finalEndVal ? this.useEasing = false : this.useEasing = this.options.useEasing;
-  }, t.prototype.start = function(t2) {
-    this.error || (this.callback = t2, this.duration > 0 ? (this.determineDirectionAndSmartEasing(), this.paused = false, this.rAF = requestAnimationFrame(this.count)) : this.printValue(this.endVal));
-  }, t.prototype.pauseResume = function() {
+    this.finalEndVal !== null ? this.useEasing = false : this.useEasing = this.options.useEasing;
+  }, i2.prototype.start = function(t2) {
+    this.error || (t2 && (this.options.onCompleteCallback = t2), this.duration > 0 ? (this.determineDirectionAndSmartEasing(), this.paused = false, this.rAF = requestAnimationFrame(this.count)) : this.printValue(this.endVal));
+  }, i2.prototype.pauseResume = function() {
     this.paused ? (this.startTime = null, this.duration = this.remaining, this.startVal = this.frameVal, this.determineDirectionAndSmartEasing(), this.rAF = requestAnimationFrame(this.count)) : cancelAnimationFrame(this.rAF), this.paused = !this.paused;
-  }, t.prototype.reset = function() {
+  }, i2.prototype.reset = function() {
     cancelAnimationFrame(this.rAF), this.paused = true, this.resetDuration(), this.startVal = this.validateValue(this.options.startVal), this.frameVal = this.startVal, this.printValue(this.startVal);
-  }, t.prototype.update = function(t2) {
-    cancelAnimationFrame(this.rAF), this.startTime = null, this.endVal = this.validateValue(t2), this.endVal !== this.frameVal && (this.startVal = this.frameVal, this.finalEndVal || this.resetDuration(), this.finalEndVal = null, this.determineDirectionAndSmartEasing(), this.rAF = requestAnimationFrame(this.count));
-  }, t.prototype.printValue = function(t2) {
-    var i = this.formattingFn(t2);
-    this.el.tagName === "INPUT" ? this.el.value = i : this.el.tagName === "text" || this.el.tagName === "tspan" ? this.el.textContent = i : this.el.innerHTML = i;
-  }, t.prototype.ensureNumber = function(t2) {
+  }, i2.prototype.update = function(t2) {
+    cancelAnimationFrame(this.rAF), this.startTime = null, this.endVal = this.validateValue(t2), this.endVal !== this.frameVal && (this.startVal = this.frameVal, this.finalEndVal == null && this.resetDuration(), this.finalEndVal = null, this.determineDirectionAndSmartEasing(), this.rAF = requestAnimationFrame(this.count));
+  }, i2.prototype.printValue = function(t2) {
+    var i3;
+    if (this.el) {
+      var n = this.formattingFn(t2);
+      if ((i3 = this.options.plugin) === null || i3 === void 0 ? void 0 : i3.render)
+        this.options.plugin.render(this.el, n);
+      else if (this.el.tagName === "INPUT")
+        this.el.value = n;
+      else
+        this.el.tagName === "text" || this.el.tagName === "tspan" ? this.el.textContent = n : this.el.innerHTML = n;
+    }
+  }, i2.prototype.ensureNumber = function(t2) {
     return typeof t2 == "number" && !isNaN(t2);
-  }, t.prototype.validateValue = function(t2) {
-    var i = Number(t2);
-    return this.ensureNumber(i) ? i : (this.error = "[CountUp] invalid start or end value: " + t2, null);
-  }, t.prototype.resetDuration = function() {
+  }, i2.prototype.validateValue = function(t2) {
+    var i3 = Number(t2);
+    return this.ensureNumber(i3) ? i3 : (this.error = "[CountUp] invalid start or end value: ".concat(t2), null);
+  }, i2.prototype.resetDuration = function() {
     this.startTime = null, this.duration = 1e3 * Number(this.options.duration), this.remaining = this.duration;
-  }, t;
+  }, i2;
 }();
 const _hoisted_1 = { class: "countup-wrap" };
 const __default__ = {
@@ -106,7 +116,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     duration: { default: 2.5 },
     decimalPlaces: { default: 0 },
     autoplay: { type: Boolean, default: true },
-    loop: { type: [Boolean, Number, String], default: false },
+    loop: { type: [Boolean, Number], default: false },
     delay: { default: 0 },
     options: { default: void 0 }
   },
@@ -121,7 +131,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
       const startVal = Number(props.startVal);
       const endVal = Number(props.endVal);
       const duration = Number(props.duration);
-      countUp.value = new CountUp(elRef.value, endVal, __spreadValues({
+      countUp.value = new i(elRef.value, endVal, __spreadValues({
         startVal,
         duration,
         decimalPlaces: props.decimalPlaces

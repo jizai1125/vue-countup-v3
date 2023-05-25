@@ -27,7 +27,7 @@ declare const _default: import("vue").DefineComponent<{
         default: boolean;
     };
     loop: {
-        type: import("vue").PropType<string | number | boolean>;
+        type: import("vue").PropType<number | boolean>;
     } & {
         default: boolean;
     };
@@ -71,7 +71,7 @@ declare const _default: import("vue").DefineComponent<{
         default: boolean;
     };
     loop: {
-        type: import("vue").PropType<string | number | boolean>;
+        type: import("vue").PropType<number | boolean>;
     } & {
         default: boolean;
     };
@@ -92,7 +92,7 @@ declare const _default: import("vue").DefineComponent<{
     options: CountUpOptions;
     duration: string | number;
     autoplay: boolean;
-    loop: string | number | boolean;
+    loop: number | boolean;
     startVal: string | number;
     decimalPlaces: number;
     delay: number;
