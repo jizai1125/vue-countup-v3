@@ -14,7 +14,6 @@ const onInit = (ctx: ICountUp) => {
 }
 const onFinished = () => {
   console.log('finished')
-  countUp?.reset()
 }
 </script>
 
