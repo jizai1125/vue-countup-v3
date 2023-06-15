@@ -113,9 +113,11 @@ import CountUp from 'vue-countup-v3'
     @finished="onFinished"></count-up>
 </template>
 ```
+</details>
+
 <details>
-<summary><strong>在 [Nuxt](https://github.com/nuxt/nuxt) 中使用（usage in Nuxt）</strong></summary>
-需在 `nuxt.config.ts` 中配置
+<summary><strong>在 Nuxt 中使用（usage in Nuxt）</strong></summary>
+需在 nuxt.config.ts 中添加配置
 
 ```ts
 // nuxt.config.ts
@@ -126,6 +128,15 @@ export default defineNuxtConfig({
     transpile: ['vue-countup-v3'],
   },
 });
+```
+</details>
+
+<details>
+<summary><strong>在 Astro 中使用（usage in Astro)</strong></summary>
+需要在组件上加个指令 client:only
+
+```vue
+<CountUp client:load client:only end-val={2000} />
 ```
 </details>
 
