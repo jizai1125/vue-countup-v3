@@ -113,7 +113,20 @@ import CountUp from 'vue-countup-v3'
     @finished="onFinished"></count-up>
 </template>
 ```
+<details>
+<summary><strong>在 [Nuxt](https://github.com/nuxt/nuxt) 中使用（usage in Nuxt）</strong></summary>
+需在 `nuxt.config.ts` 中配置
 
+```ts
+// nuxt.config.ts
+import { defineNuxtConfig } from 'nuxt3';
+
+export default defineNuxtConfig({
+  build: {
+    transpile: ['vue-countup-v3'],
+  },
+});
+```
 </details>
 
 ## 属性（Properties）
