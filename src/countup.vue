@@ -8,24 +8,21 @@ export default {
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { CountUp } from 'countup.js'
 import type { CountUpOptions } from 'countup.js'
+import { useRaf, type RafContext } from './utils'
 
 const props = withDefaults(
   defineProps<{
-    // 结束数值
     endVal: number | string
-    // 开始数值
     startVal?: number | string
-    // 动画时长，单位 s
+    // animation duration (s)
     duration?: number | string
-    // 小数点位数
     decimalPlaces?: number
-    // 是否自动计数
     autoplay?: boolean
-    // 循环次数，有限次数 / 无限循环
+    // animation times，infinite loop if true
     loop?: boolean | number
-    // 延时，单位 s
+    // delay (s) to animation
     delay?: number
-    // countup 配置项
+    // countup.js original options
     options?: CountUpOptions
   }>(),
   {
@@ -35,21 +32,28 @@ const props = withDefaults(
     autoplay: true,
     loop: false,
     delay: 0,
+    ignorePart: undefined,
     options: undefined
   }
 )
 const emits = defineEmits<{
-  // countup init complete
   (event: 'init', countup: CountUp): void
-  // count complete
   (event: 'finished'): void
 }>()
 
 let elRef = ref<HTMLElement>()
 let countUp = ref<CountUp>()
+let loopCount = 0
+const finished = ref(false)
+let rafCtx: RafContext
 
-const initCountUp = () => {
-  if (!elRef.value) return
+function initCountUp() {
+  if (!elRef.value) {
+    console.warn('[vue-countup-v3]', `elRef can't found`)
+    return
+  }
+  loopCount = 0
+  finished.value = false
   const startVal = Number(props.startVal)
   const endVal = Number(props.endVal)
   const duration = Number(props.duration)
@@ -60,43 +64,45 @@ const initCountUp = () => {
     ...props.options
   })
   if (countUp.value.error) {
-    console.error(countUp.value.error)
+    console.error('[vue-countup-v3]', countUp.value.error)
     return
   }
   emits('init', countUp.value)
 }
 
-const startAnim = (cb?: () => void) => {
-  countUp.value?.start(cb)
-}
-
-// endVal change & autoplay: true, restart animate
-watch(
-  () => props.endVal,
-  (value) => {
-    if (props.autoplay) {
-      countUp.value?.update(value)
-    }
+function startAnimation() {
+  if (!countUp.value) {
+    initCountUp()
   }
-)
-
-// loop animation
-const finished = ref(false)
-let loopCount = 0
-const loopAnim = () => {
+  countUp.value?.start(_loop)
   loopCount++
-  startAnim(() => {
+
+  function _loop() {
     const isTruely = typeof props.loop === 'boolean' && props.loop
     if (isTruely || (props.loop as number) > loopCount) {
-      delay(() => {
+      rafCtx = useRaf(() => {
         countUp.value?.reset()
-        loopAnim()
+        startAnimation()
       }, props.delay)
     } else {
       finished.value = true
     }
-  })
+  }
 }
+
+function restart() {
+  rafCtx?.cancel()
+  initCountUp()
+  startAnimation()
+}
+
+// startVal or endVal change & autoplay: true, restart animattion
+watch([() => props.startVal, () => props.endVal], () => {
+  if (props.autoplay) {
+    restart()
+  }
+})
+
 watch(finished, (flag) => {
   if (flag) {
     emits('finished')
@@ -106,34 +112,14 @@ watch(finished, (flag) => {
 onMounted(() => {
   initCountUp()
   if (props.autoplay) {
-    loopAnim()
+    startAnimation()
   }
 })
+
 onUnmounted(() => {
-  cancelAnimationFrame(dalayRafId)
+  rafCtx?.cancel()
   countUp.value?.reset()
 })
-
-let dalayRafId: number
-// delay to execute callback function
-const delay = (cb: () => unknown, seconds = 1) => {
-  let startTime: number
-  function count(timestamp: number) {
-    if (!startTime) startTime = timestamp
-    const diff = timestamp - startTime
-    if (diff < seconds * 1000) {
-      dalayRafId = requestAnimationFrame(count)
-    } else {
-      cb()
-    }
-  }
-  dalayRafId = requestAnimationFrame(count)
-}
-
-const restart = () => {
-  initCountUp()
-  startAnim()
-}
 
 defineExpose({
   init: initCountUp,

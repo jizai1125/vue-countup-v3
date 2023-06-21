@@ -45,30 +45,29 @@
             :duration="4"&gt;&lt;/count-up&gt;</code
           >
           <count-up
-            ref="example1"
+            ref="countupRef"
             class="example1"
             :start-val="startVal1"
             :end-val="endVal1"
-            :duration="4"
-            @init="onInit"></count-up>
-          <div class="example-btn" @click="restart">reset & start</div>
-          <div class="example-btn" @click="changeExampleEndVal">change end-val</div>
+            :duration="4"></count-up>
+          <div class="example-btn" @click="restart">restart</div>
+          <div class="example-btn" @click="changeStartVal">change start-val</div>
+          <div class="example-btn" @click="changeEndVal">change end-val</div>
           <div class="example-btn" @click="incrementalUpdate">incremental update</div>
         </div>
         <div class="example-item" :style="{ boxShadow: `0px 8px 12px -7px ${color}` }">
           <h3>count down example</h3>
           <code>
             &lt;count-up :startVal=&#x27;2022&#x27; :endVal=&#x27;0&#x27;
-            :duration="8"&gt;&lt;/count-up&gt;</code
+            :duration="4"&gt;&lt;/count-up&gt;</code
           >
           <count-up
-            ref="example2"
+            ref="countupRef2"
             class="example2"
             :start-val="2022"
             :end-val="0"
-            :duration="8"
-            @init="onInit2"></count-up>
-          <div class="example-btn" @click="restart2">reset & start</div>
+            :duration="4"></count-up>
+          <div class="example-btn" @click="restart2">restart</div>
         </div>
         <div class="example-item" :style="{ boxShadow: `0px 8px 12px -7px ${color}` }">
           <h3>custom example</h3>
@@ -84,7 +83,7 @@
           </count-up>
           <div>
             <label class="label" for="startValInput"
-              >startVal: <input type="number" v-model.number="start_val" name="startValInput"
+              >startVal: <input type="number" v-model.number="setStartVal" name="startValInput"
             /></label>
             <label class="label" for="endValInput"
               >endVal: <input type="number" v-model.number="setEndVal" name="endVaInput"
@@ -137,15 +136,14 @@
           // simple example
           const startVal1 = ref(0)
           const endVal1 = ref(2022)
-          let countupCtx
-          const onInit = (countup) => {
-            countupCtx = countup
+          const countupRef = ref()
+          function restart () {
+            countupRef.value.restart()
           }
-          const restart = () => {
-            countupCtx.reset()
-            countupCtx.start()
+          function changeStartVal() {
+            startVal1.value += 1000
           }
-          const changeExampleEndVal = () => {
+          const changeEndVal = () => {
             endVal1.value += 1000
           }
           const incrementalUpdate = () => {
@@ -153,13 +151,9 @@
             endVal1.value += 1000
           }
           // count down example
-          let countupCtx2
-          const onInit2 = (countup) => {
-            countupCtx2 = countup
-          }
+          const countupRef2 = ref()
           const restart2 = () => {
-            countupCtx2.reset()
-            countupCtx2.start()
+            countupRef2.value.restart()
           }
           // custom example
           const example3 = ref()
@@ -203,7 +197,7 @@
           })
           const decimals = computed(() => {
             if (!setDecimalPlaces.value) return 0
-            if (etDecimals.value < 0 || setDecimalPlaces.value > 20) {
+            if (setDecimalPlaces.value < 0 || setDecimalPlaces.value > 20) {
               alert('digits argument must be between 0 and 20')
               return 0
             }
@@ -219,6 +213,7 @@
               decimalPlaces: setDecimalPlaces.value
             }
           })
+          // page style
           const color = ref(getRandomColor())
           setInterval(() => {
             color.value = getRandomColor()
@@ -226,8 +221,17 @@
           return {
             color,
             setDecimal,
-            reset3,
+            startVal1,
+            endVal1,
+            countupRef,
+            restart,
+            changeStartVal,
+            changeEndVal,
+            incrementalUpdate,
+            countupRef2,
+            restart2,
             example3,
+            reset3,
             options,
             start_val,
             pauseResume,
@@ -236,9 +240,7 @@
             decimals,
             duration,
             end_val,
-            onInit2,
-            restart2,
-            incrementalUpdate,
+            
             setStartVal,
             setEndVal,
             setDuration,
@@ -246,11 +248,6 @@
             setSeparator,
             setSuffix,
             setPrefix,
-            startVal1,
-            endVal1,
-            onInit,
-            restart,
-            changeExampleEndVal
           }
         }
       }
