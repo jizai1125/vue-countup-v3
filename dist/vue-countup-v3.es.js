@@ -17,7 +17,7 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-import { defineComponent, ref, watch, onMounted, onUnmounted, openBlock, createElementBlock, renderSlot, createElementVNode } from "vue";
+import { ref, defineComponent, watch, onMounted, onUnmounted, openBlock, createElementBlock, renderSlot, createElementVNode } from "vue";
 var t = function() {
   return t = Object.assign || function(t2) {
     for (var i2, n = 1, s = arguments.length; n < s; n++)
@@ -105,6 +105,25 @@ var t = function() {
     this.startTime = null, this.duration = 1e3 * Number(this.options.duration), this.remaining = this.duration;
   }, i2;
 }();
+function useRaf(cb, delaySeconds = 1) {
+  const rafId = ref(-1);
+  let startTime;
+  function count(timestamp) {
+    if (!startTime)
+      startTime = timestamp;
+    const diff = timestamp - startTime;
+    if (diff < delaySeconds * 1e3) {
+      rafId.value = requestAnimationFrame(count);
+    } else {
+      cb();
+    }
+  }
+  rafId.value = requestAnimationFrame(count);
+  function cancel() {
+    window.cancelAnimationFrame(rafId.value);
+  }
+  return { cancel };
+}
 const _hoisted_1 = { class: "countup-wrap" };
 const __default__ = {
   name: "CountUp"
@@ -125,9 +144,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     const props = __props;
     let elRef = ref();
     let countUp = ref();
-    const initCountUp = () => {
-      if (!elRef.value)
+    let loopCount = 0;
+    const finished = ref(false);
+    let rafCtx;
+    function initCountUp() {
+      if (!elRef.value) {
+        console.warn("[vue-countup-v3]", `elRef can't found`);
         return;
+      }
+      loopCount = 0;
+      finished.value = false;
       const startVal = Number(props.startVal);
       const endVal = Number(props.endVal);
       const duration = Number(props.duration);
@@ -137,38 +163,41 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
         decimalPlaces: props.decimalPlaces
       }, props.options));
       if (countUp.value.error) {
-        console.error(countUp.value.error);
+        console.error("[vue-countup-v3]", countUp.value.error);
         return;
       }
       emits("init", countUp.value);
-    };
-    const startAnim = (cb) => {
+    }
+    function startAnimation() {
       var _a;
-      (_a = countUp.value) == null ? void 0 : _a.start(cb);
-    };
-    watch(() => props.endVal, (value) => {
-      var _a;
-      if (props.autoplay) {
-        (_a = countUp.value) == null ? void 0 : _a.update(value);
+      if (!countUp.value) {
+        initCountUp();
       }
-    });
-    const finished = ref(false);
-    let loopCount = 0;
-    const loopAnim = () => {
+      (_a = countUp.value) == null ? void 0 : _a.start(_loop);
       loopCount++;
-      startAnim(() => {
+      function _loop() {
         const isTruely = typeof props.loop === "boolean" && props.loop;
         if (isTruely || props.loop > loopCount) {
-          delay(() => {
-            var _a;
-            (_a = countUp.value) == null ? void 0 : _a.reset();
-            loopAnim();
+          rafCtx = useRaf(() => {
+            var _a2;
+            (_a2 = countUp.value) == null ? void 0 : _a2.reset();
+            startAnimation();
           }, props.delay);
         } else {
           finished.value = true;
         }
-      });
-    };
+      }
+    }
+    function restart() {
+      rafCtx == null ? void 0 : rafCtx.cancel();
+      initCountUp();
+      startAnimation();
+    }
+    watch([() => props.startVal, () => props.endVal], () => {
+      if (props.autoplay) {
+        restart();
+      }
+    });
     watch(finished, (flag) => {
       if (flag) {
         emits("finished");
@@ -177,33 +206,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     onMounted(() => {
       initCountUp();
       if (props.autoplay) {
-        loopAnim();
+        startAnimation();
       }
     });
     onUnmounted(() => {
       var _a;
-      cancelAnimationFrame(dalayRafId);
+      rafCtx == null ? void 0 : rafCtx.cancel();
       (_a = countUp.value) == null ? void 0 : _a.reset();
     });
-    let dalayRafId;
-    const delay = (cb, seconds = 1) => {
-      let startTime;
-      function count(timestamp) {
-        if (!startTime)
-          startTime = timestamp;
-        const diff = timestamp - startTime;
-        if (diff < seconds * 1e3) {
-          dalayRafId = requestAnimationFrame(count);
-        } else {
-          cb();
-        }
-      }
-      dalayRafId = requestAnimationFrame(count);
-    };
-    const restart = () => {
-      initCountUp();
-      startAnim();
-    };
     expose({
       init: initCountUp,
       restart
