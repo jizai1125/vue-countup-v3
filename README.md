@@ -151,7 +151,7 @@ export default defineNuxtConfig({
 | autoplay | Boolean           | true    | 是否自动计数                  |  |
 | loop     | Boolean \| Number | false   | 循环次数，有限次数 / 无限循环 |  |
 | delay    | Number            | 0       | loop 循环的间隔时间，单位：秒 |  |
-| options  |      Object      |    -    | [countUp.js Options](https://github.com/inorganik/countUp.js#usage) |  |
+| options  |      Object      |    -    | [countUp.js Options](#coutupjs-%E8%AF%B4%E6%98%8E) |  |
 
 ## 插槽（slots）
 
