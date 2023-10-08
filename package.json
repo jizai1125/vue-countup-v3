@@ -15,12 +15,6 @@
   "auther": "jizai <1414589221@qq.com>",
   "main": "dist/vue-countup-v3.umd.js",
   "module": "dist/vue-countup-v3.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/vue-countup-v3.es.js",
-      "require": "./dist/vue-countup-v3.umd.js"
-    }
-  },
   "types": "dist/countup.vue.d.ts",
   "repository": {
     "type": "git",
