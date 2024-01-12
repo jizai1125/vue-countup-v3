@@ -74,6 +74,7 @@ function startAnimation() {
   if (!countUp.value) {
     initCountUp()
   }
+  // passing fn to start will override countup.js's options.onCompleteCallback)
   countUp.value?.start(_loop)
   loopCount++
 
@@ -105,6 +106,9 @@ watch([() => props.startVal, () => props.endVal], () => {
 
 watch(finished, (flag) => {
   if (flag) {
+    if (props.options?.onCompleteCallback) {
+      props.options.onCompleteCallback()
+    }
     emits('finished')
   }
 })

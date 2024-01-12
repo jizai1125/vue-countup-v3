@@ -7,14 +7,17 @@ const startValueRef = ref(0)
 const endValueRef = ref(2022.22)
 
 const options: CountUpOptions = {
-  separator: '❤️'
+  separator: '❤️',
+  onCompleteCallback() {
+    console.log('onCompleteCallback finished !!!')
+  }
 }
 let countUp: ICountUp | undefined
 const onInit = (ctx: ICountUp) => {
   countUp = ctx
 }
 const onFinished = () => {
-  console.log('finished')
+  console.log('finished!!!')
 }
 
 const countupRef = ref<InstanceType<typeof CountUp>>()
@@ -50,7 +53,7 @@ const changeEndVal = () => {
     :decimal-places="2"
     :options="options"
     :loop="2"
-    :delay="5"
+    :delay="2"
     @init="onInit"
     @finished="onFinished">
     <template #prefix>
