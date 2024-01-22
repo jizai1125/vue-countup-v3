@@ -1,6 +1,6 @@
 /**
  * 版本发布
- * 可通过命令行指定版本号 yarn release 1.2.3
+ * 可通过命令行指定版本号 pnpm release 1.2.3
  * 命令行可选项
  * --preid 指定先行版本号
  * --tag 指定 npm tag
@@ -37,7 +37,7 @@ const versionIncTypes = [
 ]
 
 async function main() {
-  step('\n1. 确定版本号')
+  step('\n确定版本号')
   let targetVersion = args._[0]
   if (!targetVersion) {
     // 选择
@@ -72,16 +72,20 @@ async function main() {
     return
   }
 
-  step('\n2. 更新 package.json 文件版本号')
+  step('\n更新 package.json 文件版本号')
   updatePkgVersion(targetVersion)
 
-  step('\n3. 运行打包命令')
-  await runIfNotDry('yarn', ['build'])
+  step('\n运行打包命令')
+  await runIfNotDry('pnpm', ['run', 'build'])
 
-  step('\n4. 生成changelog')
-  await runIfNotDry('yarn', ['run', 'changelog'])
+  step('\n生成changelog')
+  await runIfNotDry('pnpm', ['run', 'changelog'])
 
-  step('\n5. git 提交代码')
+  // update pnpm-lock.yaml
+  step('\\nUpdating lockfile...')
+  await run(`pnpm`, ['install', '--prefer-offline'])
+
+  step('\ngit 提交代码')
   const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
   if (stdout) {
     // git add -A
@@ -92,10 +96,10 @@ async function main() {
     console.log('git 没有可提交内容')
   }
 
-  step('\n6. 发布新版本包到 npm')
+  step('\n发布新版本包到 npm')
   await publishPackage(targetVersion)
 
-  step('\n7. 创建 tag & 代码 push 到 github 仓库')
+  step('\n创建 tag & 代码 push 到 github 仓库')
   await runIfNotDry('git', ['tag', `v${targetVersion}`])
   await runIfNotDry('git', ['push', 'origin', `refs/tags/v${targetVersion}`])
   await runIfNotDry('git', ['push'])
@@ -122,6 +126,7 @@ async function publishPackage(version) {
     releaseTag = 'rc'
   }
   const pkgRoot = path.resolve(__dirname, '../')
+  // note: use of yarn is intentional here as we rely on its publishing behavior.
   await runIfNotDry(
     'yarn',
     [
