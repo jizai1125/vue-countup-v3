@@ -135,11 +135,13 @@ async function publishPackage(version) {
       version,
       ...(releaseTag ? ['--tag', releaseTag] : []),
       '--access',
-      'public'
+      'public',
+      '--registry',
+      'https://registry.npmjs.org/'
     ],
     {
-      cwd: pkgRoot,
-      stdio: 'pipe'
+      cwd: pkgRoot
+      // stdio: 'pipe'
     }
   )
 }

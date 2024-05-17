@@ -1,3 +1,5 @@
 /dist
 *.d.ts
 /scripts
+.eslintrc.*
+.prettierrc.*

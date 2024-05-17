@@ -16,18 +16,14 @@ export default defineConfig({
     lib: {
       entry: resolvePath('src/countup.vue'),
       name: 'VueCountUp',
-      formats: ['es', 'umd', 'iife'],
-      fileName: (format) => `${pkg.name}.${format}.js`
+      formats: ['es'],
+      fileName: (format) => `${pkg.name}.js`
     },
     rollupOptions: {
-      external: [
-        'vue'
-        // 'countup.js'
-      ],
+      external: ['vue'],
       output: {
         globals: {
           vue: 'Vue'
-          // 'countup.js': 'countUp'
         }
       }
     }

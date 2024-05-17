@@ -25,11 +25,12 @@
     "dist/*"
   ],
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "release": "node scripts/release.js",
-    "build": "vite build && npm run build:dts",
-    "build:dts": "vue-tsc --declaration --emitDeclarationOnly --declarationDir dist",
+    "release": "node scripts/release.cjs",
+    "build": "vite build && npm run build:dts && rollup -c",
+    "build:dts": "vue-tsc --declaration --emitDeclarationOnly",
     "check:type": "vue-tsc --noEmit",
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
@@ -42,8 +43,11 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.24.5",
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/node": "^20.11.0",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
@@ -61,10 +65,10 @@
     "minimist": "^1.2.6",
     "prettier": "^2.5.1",
     "semver": "^7.3.5",
-    "typescript": "^4.5.4",
+    "typescript": "^5.2.2",
     "vite": "^5.0.11",
     "vue": "^3.2.31",
-    "vue-tsc": "^0.29.8"
+    "vue-tsc": "^2.0.6"
   },
   "lint-staged": {
     "*.{ts,tsx,vue,js,jsx}": "eslint --fix"

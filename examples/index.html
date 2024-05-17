@@ -9,9 +9,9 @@
   <body>
     <script src="https://unpkg.com/vue@latest"></script>
     <!-- <script src="https://inorganik.github.io/countUp.js/dist/countUp.umd.js"></script> -->
-    <!-- <script src="../dist/vue-countup-v3.iife.js"></script> -->
     <!-- <script src="https://unpkg.com/vue-countup-v3@1.0.5/dist/vue-countup-v3.umd.js"></script> -->
-    <script src="https://unpkg.com/vue-countup-v3@latest/dist/vue-countup-v3.iife.js"></script>
+    <!-- <script src="../dist/vue-countup-v3.umd.js"></script> -->
+    <script src="https://unpkg.com/vue-countup-v3@latest/dist/vue-countup-v3.umd.js"></script>
     <div id="app">
       <a
         href="https://github.com/jizai1125/vue-countup-v3"
@@ -264,6 +264,7 @@
       }
       const app = Vue.createApp(App)
       // vue-countup-v3 暴露的全局变量 VueCountUp
+      console.log(VueCountUp)
       app.component('CountUp', VueCountUp)
       app.component('ColorTitle', ColorTitle)
 
