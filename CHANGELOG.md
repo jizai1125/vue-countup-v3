@@ -1,3 +1,12 @@
+## [1.4.2](https://github.com/jizai1125/vue-countup-v3/compare/v1.4.0...v1.4.2) (2024-05-17)
+
+
+### Bug Fixes
+
+* countup.js onCompleteCallback not work ([4aaeafa](https://github.com/jizai1125/vue-countup-v3/commit/4aaeafa1cefc7814d1deb6bd8ba605aff67f8aee))
+
+
+
 ## [1.4.1](https://github.com/jizai1125/vue-countup-v3/compare/v1.4.0...v1.4.1) (2024-01-12)
 
 
