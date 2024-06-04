@@ -117,6 +117,7 @@ import CountUp from 'vue-countup-v3'
 
 <details>
 <summary><strong>在 Nuxt 中使用（usage in Nuxt）</strong></summary>
+
 需在 nuxt.config.ts 中添加配置
 
 ```ts
@@ -129,11 +130,18 @@ export default defineNuxtConfig({
   },
 });
 ```
+或者用 `<ClientOnly>` 组件包裹
+```vue
+<ClientOnly>
+  <CountUp :end-val="3000" :options="{ enableScrollSpy: true }" />
+</ClientOnly>
+```
 </details>
 
 <details>
 <summary><strong>在 Astro 中使用（usage in Astro)</strong></summary>
-需要在组件上加个指令 client:only
+
+需要在组件上加个指令 `client:only`
 
 ```vue
 <CountUp client:load client:only end-val={2000} />
