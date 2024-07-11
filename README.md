@@ -27,7 +27,7 @@ cdn 方式引入，暴露的全局变量为 VueCountUp
     </div>
 
     <script src="https://unpkg.com/vue@latest"></script>
-    <script src="https://unpkg.com/vue-countup-v3@latest/dist/vue-countup-v3.iife.js"></script>
+    <script src="https://unpkg.com/vue-countup-v3@latest/dist/vue-countup-v3.umd.js"></script>
     <script>
         const app = Vue.createApp({})
         app.component('CountUp', VueCountUp)
