@@ -115,8 +115,30 @@ import CountUp from 'vue-countup-v3'
 ```
 </details>
 
+
+### SSR 中使用
+
 <details>
-<summary><strong>在 Nuxt 中使用（usage in Nuxt）</strong></summary>
+<summary><strong>Vite</strong></summary>
+
+需在 vite.config.ts 中添加配置，将 vue-countup-v3 加入 ssr.noExternal 配置中，让 vite 不视为外部依赖，将依赖包含在 SSR 的打包中，避免出现问题。
+
+```ts
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  // ...
+  ssr: {
+    noExternal: ['vue-countup-v3']
+  }
+})
+
+```
+
+</details>
+
+<details>
+<summary><strong>Nuxt</strong></summary>
 
 需在 nuxt.config.ts 中添加配置
 
@@ -139,7 +161,7 @@ export default defineNuxtConfig({
 </details>
 
 <details>
-<summary><strong>在 Astro 中使用（usage in Astro)</strong></summary>
+<summary><strong>Astro</strong></summary>
 
 需要在组件上加个指令 `client:only`
 
